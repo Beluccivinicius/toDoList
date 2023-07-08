@@ -21,7 +21,7 @@ router.get('/:dia', (req, res) => {
 
 router.post('/', (req, res) => {
     const { oQueFazer, mes, dia, hora, minuto, prioridade } = req.body;
-    const horaCerta = toDo.some((element) => element.hora == hora);
+    const horaCerta = toDo.some((element) => element.hora == req.body.hora);
     const compromisso = {
         id: uuid.v4(),
         oQueFazer,
@@ -31,18 +31,18 @@ router.post('/', (req, res) => {
         minuto,
         prioridade
     };
-
-    if (!dia) {
-        return res.status(400).json({ mgs: 'coloque o dia' });
+    if (horaCerta == true && dia == toDo.dia) {
+        return res.status(400).json({ msg: 'você já tem compromisso nessa hora' });
+    }
+    if (!dia && !mes) {
+        return res.status(400).json({ mgs: 'coloque o dia' }); //ele simplesmente não lê minha condição de ter um mês e um dia
     } else if (dia > 31 || dia < 0) {
         return res.status(400).json({ msg: 'dia invalido' });
     }
     if (!oQueFazer) {
         return res.status(400).json({ mgs: 'falta o que fazer ' });
     }
-    if (horaCerta === true && dia == toDo.dia) {
-        return res.status(400).json({ msg: 'você já tem compromisso nessa hora' });
-    }
+
     toDo.push(compromisso);
     res.json(toDo);
 });

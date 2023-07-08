@@ -6,7 +6,8 @@ const router = express.Router();
 router.get('/', (req, res) =>
     res.render('login', {
         title: 'Área de login',
-        login
+        login,
+        style: 'loggar.css'
     })
 );
 
