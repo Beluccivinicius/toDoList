@@ -1,11 +1,46 @@
+<body>
 <head>
-<h1>{{title}}</h1>
+    <h1>toDo list</h1>
 </head>
-<ul class="list-group">
-</div>
-    {{#each toDo}}
-    <li class="list-group-item list-group-item-action">{{this.oQueFazer}} dia {{this.dia}} {{this.hora}} : {{this.minutos}}
-    <span class="badge badge-primary badge-pill"></span>
-    </li>
-    {{/each}}
-</ul>
+<section class="form">
+    <form  action="/tarefas/" method="POST" id="post" name="principal">
+        <div>
+            <label>O que vamos fazer hoje?</label>
+            <input type="text" class="text" name="oQueFazer" id="toDo">
+        </div>
+        <div>
+            <label>Hora</label>
+            <input type="time" class="time" name="hora" id="time">
+        </div>
+        <div>
+            <label>Dia</label>
+            {{!-- a propriedade name especifica no corpo da minha requisição o que é cada input --}}
+            <input type="date" class="date" name="dia" id="date">
+        </div>
+        <div>
+            <input type="submit" class="button" value="POST">
+        </div>
+    </form>
+</section>
+<form  action="/tarefas/:oQueFazer" method="DELETE" id="delete" name="delete">
+    <ul class="list-group">
+        {{#each toDo}}
+            <li class="boxToDo" id="boxToDo">
+                <div id="check">
+                    <input type="submit" class="button1" id="checkBox" value="deletar" name="{{id}}">
+                </div>
+                <div id="minus"></div>
+                    <div id="day">
+                        <h3>dia {{this.dataCerta}}/{{this.mesCerto}}</h3> 
+                    </div>
+                    <div id="do-hour">
+                        <h2>{{this.oQueFazer}}</h2>
+                        <h3>{{this.hora}}</h3>
+                    </div>
+            </li>
+        {{/each}}
+    </ul>
+</form>
+</body>
+
+

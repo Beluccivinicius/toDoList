@@ -2,25 +2,26 @@ const toDo = [
     {
         id: 1,
         oQueFazer: 'passear com o cachorro',
-        dia: 15,
-        hora: 6,
-        minutos: 40,
+        dataCerta: '08',
+        mesCerto: '09',
+        hora: '20:10',
         prioridade: 'baixa'
     },
     {
+        // ele reconhece que dia Certo e mes certo é apenas um
         id: 2,
         oQueFazer: 'levar a vó na natação',
-        dia: 13,
-        hora: 15,
-        minutos: 40,
+        dataCerta: '09',
+        mesCerto: '09',
+        hora: '15:20',
         prioridade: 'alta'
     },
     {
         id: 3,
         oQueFazer: 'ir no mercado',
-        dia: 12,
-        hora: 20,
-        minutos: 00,
+        dataCerta: '07',
+        mesCerto: '09',
+        hora: '20:09',
         prioridade: 'média'
     }
 ];
