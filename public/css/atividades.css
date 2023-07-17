@@ -54,6 +54,7 @@ label{
 input{
     margin-left: 40px;
     margin-right: 40px;
+    
 }
 /* Email */
 input.text{
@@ -97,6 +98,7 @@ border-radius: 15px;
 /* botão de enviar */
 input.button{
 box-sizing: border-box;
+font-family: 'Roboto', sans-serif;
 margin-top: 48px;
 margin-left: 200%; /*Não faço ideia como centralizar esse botão*/
 padding-left: 90px;
@@ -107,7 +109,7 @@ border-radius: 41px;
 background: #859876;
 color: #D9D9D9;
 font-size: 32px;
-font-weight: 200;
+font-weight: 500;
 }
 
 /* menos dentro do botão*/
@@ -135,8 +137,10 @@ input.button1{
     width: 44px;
     float: left;
 }
+
 input.button:hover{
     background-color: #212C14;
+    
 }
 
 /* deixando os forms lado a lado */
