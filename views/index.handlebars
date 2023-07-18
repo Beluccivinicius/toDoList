@@ -22,12 +22,13 @@
         </div>
     </form>
 </section>
-<form  action="/tarefas/:oQueFazer" method="DELETE" id="delete" name="delete">
     <ul class="list-group">
         {{#each toDo}}
             <li class="boxToDo" id="boxToDo">
                 <div id="check">
-                    <input type="submit" class="button1" id="checkBox" value="deletar" name="{{id}}">
+                    <form  action="/tarefas/{{this.id}}" method="GET" id="delete-{{this.id}}" name="delete">
+                        <input type="submit" class="button1" id="checkBox" value="deletar" name="id">
+                    </form>
                 </div>
                 <div id="minus"></div>
                     <div id="day">
@@ -40,7 +41,6 @@
             </li>
         {{/each}}
     </ul>
-</form>
 </body>
 
 

@@ -47,8 +47,12 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const { oQueFazer } = req.params;
-    const apagar = toDo.find((element) => element.oQueFazer === oQueFazer);
+    const { id } = req.params;
+    const apagar = toDo.findIndex((element) => element.id == id);
+    if (apagar == -1) {
+        console.log('olá');
+        return res.status(404).end();
+    }
     toDo.splice(apagar, 1);
     // res.json(toDo);
     res.redirect('/tarefas');
