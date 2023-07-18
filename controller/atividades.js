@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
         return res.status(400).json({ msg: 'você já tem compromisso nessa hora' });
     }
     if (!dia) {
-        return res.status(400).json({ msg: 'coloque o dia' }); //ele simplesmente não lê minha condição de ter um mês e um dia
+        return res.status(400).json({ msg: 'coloque o dia' });
     } else if (dia > 31 || dia < 0) {
         return res.status(400).json({ msg: 'dia invalido' });
     }
@@ -54,7 +54,6 @@ router.get('/:id', (req, res) => {
         return res.status(404).end();
     }
     toDo.splice(apagar, 1);
-    // res.json(toDo);
     res.redirect('/tarefas');
 });
 

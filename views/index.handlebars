@@ -30,7 +30,12 @@
                         <input type="submit" class="button1" id="checkBox" value="deletar" name="id">
                     </form>
                 </div>
-                <div id="minus"></div>
+                <div id="minus">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit">
+                        <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
+                        <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
+                    </svg>
+                </div>
                     <div id="day">
                         <h3>dia {{this.dataCerta}}/{{this.mesCerto}}</h3> 
                     </div>
@@ -42,5 +47,14 @@
         {{/each}}
     </ul>
 </body>
+<script>
+    //const btn = document.getElementById('checkBox');
+    const x = document.getElementById('minus')
+
+x.addEventListener('click', (e) => {
+
+});
+
+</script>
 
 

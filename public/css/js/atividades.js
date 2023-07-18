@@ -1,13 +1,7 @@
-document.getElementById('foi').addEventListener('click', function () {
-    alert('Hello World!');
-});
-
-const btn = document.getElementById('delete');
+const btn = document.getElementById('checkBox');
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
 
-    const name = document.getElementsByName('do').value;
-
-    console.log(name);
+    console.log('oi');
 });
