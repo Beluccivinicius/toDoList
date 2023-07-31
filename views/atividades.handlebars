@@ -1,0 +1,65 @@
+<body>
+<head>
+    <h1>toDo list</h1>
+</head>
+<section class="form">
+    <form  action="/atividades" method="POST" id="post" name="principal">
+        <div>
+            <label>O que vamos fazer?</label>
+            <input type="text" class="text" name="oQueFazer" id="toDo">
+        </div>
+        <div>
+            <label>Hora</label>
+            <input type="time" class="time" name="horaCerta" id="time">
+        </div>
+        <div>
+            <label>Dia</label>
+            {{!-- a propriedade name especifica no corpo da minha requisição o que é cada input --}}
+            <input type="date" class="date" name="dataCerta" id="date">
+        </div>
+        <br>
+        <div>
+            <input type="submit" class="button" value="POST">
+        </div>
+    </form>
+</section>
+    <ul class="list-group">
+        {{#each toDo}}
+            <li class="boxToDo" id="boxToDo">
+                <div id="check">
+                    <form  action="/atividades" method="GET" id="delete-{{this._id}}" name="delete">
+                        <input type="submit" class="button1" id="checkBox" name="id" value="{{this._id}}">
+                    </form>
+                </div>
+                <div id="minus">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit">
+                        <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
+                        <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
+                    </svg>
+                </div>
+                    <div id="day">
+                        <h3>dia {{this.dataCerta}}</h3> 
+                    </div>
+                    <div id="do-hour">
+                        <h2>{{this.oQueFazer}}</h2>
+                        <h3>{{this.horaCerta}}</h3>
+                    </div>
+            </li>
+        {{/each}}
+    </ul>
+</body>
+<script>
+    const btn = document.getElementById('checkBox');
+
+btn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    console.log("meupa") 
+});
+const dia = document.getElementsByTagName('h3')
+console.log(dia)
+</script>
+
+
+
+
