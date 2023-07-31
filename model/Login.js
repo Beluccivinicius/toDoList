@@ -1,6 +1,22 @@
-const login = {
-    email: 'vinicius@gmail.com',
-    senha: 'Belucci01'
-};
+const { Timestamp } = require('mongodb');
+const mongoose = require('mongoose');
 
-module.exports = login;
+const { Schema } = mongoose;
+
+const loginSchema = new Schema(
+    {
+        email: {
+            type: String,
+            required: true
+        },
+        senha: {
+            type: String,
+            required: true
+        }
+    },
+    { timestamps: true }
+);
+
+const Login = mongoose.model('Login', loginSchema);
+
+module.exports = Login;
