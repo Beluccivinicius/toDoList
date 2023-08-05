@@ -3,16 +3,13 @@ const router = express.Router();
 const activitiesService = require('../service/activity');
 const ToDoModel = require('../model/toDoList');
 
-router.get('/:id', async (req, res, next) => {
-    const { id } = req.params.id;
-    const toDo = await activitiesService.deleteOne(id);
-
+router.delete('/', async (req, res, next) => {
+    const { id } = req.params;
     try {
-        res.render('atividades', {
-            style: 'atividades.css',
-            script: 'atividades.js',
-            toDo
-        });
+        console.log(id);
+        const toDo = await activitiesService.getAll();
+        const deleted = await activitiesService.deleteOne(id);
+        res.status(200).json(toDo);
     } catch (error) {
         res.status(500).json({ msg: 'Algo deu errado' });
         console.log(error);
@@ -28,7 +25,7 @@ router.get('/', async (req, res, next) => {
             toDo
         });
     } catch (error) {
-        res.status(500).end('<h1>Deu erro</h1>');
+        res.status(500).end('Deu erro');
     }
 });
 
