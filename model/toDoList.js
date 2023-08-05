@@ -6,7 +6,9 @@ const { Schema } = mongoose;
 const toDoSchema = new Schema(
     {
         oQueFazer: String,
-        dataCerta: String,
+        dia: String,
+        mes: String,
+        ano: String,
         horaCerta: String,
         prioridade: String
     },

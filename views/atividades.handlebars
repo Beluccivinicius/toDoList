@@ -2,7 +2,7 @@
 <head>
     <h1>toDo list</h1>
 </head>
-<section class="form">
+<div class="container">
     <form  action="/atividades" method="POST" id="post" name="principal">
         <div>
             <label>O que vamos fazer?</label>
@@ -22,44 +22,56 @@
             <input type="submit" class="button" value="POST">
         </div>
     </form>
-</section>
+</div>
     <ul class="list-group">
         {{#each toDo}}
             <li class="boxToDo" id="boxToDo">
                 <div id="check">
-                    <form  action="/atividades" method="GET" id="delete-{{this._id}}" name="delete">
-                        <input type="submit" class="button1" id="checkBox" name="id" value="{{this._id}}">
-                    </form>
-                </div>
-                <div id="minus">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit">
-                        <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
-                        <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
-                    </svg>
+                        <button type="submit" class="exclusion" name="id" value="{{this._id}}" id="exclusion">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit">
+                                <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
+                                <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
+                            </svg>
+                        </button>
                 </div>
                     <div id="day">
-                        <h3>dia {{this.dataCerta}}</h3> 
+                        <span>dia {{this.dia}}/{{this.mes}}<span> 
                     </div>
                     <div id="do-hour">
-                        <h2>{{this.oQueFazer}}</h2>
-                        <h3>{{this.horaCerta}}</h3>
+                        <span>{{this.oQueFazer}}</span>
+                        <span>{{this.horaCerta}}</span>
                     </div>
             </li>
         {{/each}}
     </ul>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    const btn = document.getElementById('checkBox');
+const btn = document.getElementById('exclusion');
+const id = btn.value
+//meu btn.value está passando um valor indefinido para meu backAnd, decidi partir para 
+//um frot-and melhor para o que eu quero fazer
+const deleted = (id) => {
+    axios
+        .delete('http://localhost:8000/atividades', {
+            id: id
+        })
+        .then((res) => console.log(res))
+        .catch((error) => {
+            if (error.request) {
+                console.log('sem resposta servidor');
+            } else if (error.response) {
+                console.log('Erro de resposta do servidor');
+            } else {
+                console.log('Erro ao fazer a solicitação');
+            }
+        });
+};
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-
-    console.log("meupa") 
+    deleted(id);
 });
-const dia = document.getElementsByTagName('h3')
-console.log(dia)
 </script>
-
-
 
 

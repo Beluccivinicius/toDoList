@@ -7,9 +7,10 @@ const activitiesService = {
         //     return { msg: 'insira o que vamos fazer' };
         // }
 
-        // const { oQueFazer, dataCerta, horaCerta } = activity;
+        const { oQueFazer, dataCerta, horaCerta } = activity;
+        const [ano, mes, dia] = activity.dataCerta.split('-');
         try {
-            const post = await ToDoModel.create(activity);
+            const post = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta });
             return;
         } catch (error) {
             console.log(error);
@@ -18,7 +19,8 @@ const activitiesService = {
     },
     deleteOne: async (id) => {
         try {
-            const excluison = await ToDoModel.remove({ _id: ObjectId(`${id}`) });
+            console.log(id);
+            const excluison = await ToDoModel.deleteOne({ _id: `${id}` });
             return;
         } catch (error) {
             console.log(error);
