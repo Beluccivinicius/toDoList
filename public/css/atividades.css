@@ -6,6 +6,9 @@
 input {
     all: unset;
 }
+button{
+    all:unset
+}
 /* plano de fundo */
 body{
     background: #373737;
@@ -20,17 +23,21 @@ h1 {
     margin-top: 54px;
 }
 /* o que fazer estilo de texto */
-h2{
+div#do-hour{
 font-family: Roboto;
 font-size: 32px;
+margin-left: 41px;
 font-style: normal;
+align-items: left;
 font-weight: 300;
 line-height: thin;
 }
 
-h3{
+div#day{
 font-family: Roboto;
 font-size: 24px;
+margin-right: 20px;
+margin-left: auto;
 font-style: normal;
 font-weight: 300;
 color: #7E7E7E;
@@ -43,24 +50,20 @@ label{
     font-size: 24px;
     margin-left: 40px;
     margin-right: 40px;
-    margin-top: 60px;
+    margin-top: 41px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
     display: block;
     margin-bottom: 10px;
 }
-/* espaçamentos de todos os inputs */
-input{
-    margin-left: 40px;
-    margin-right: 40px;
-    
-}
+
 /* Email */
 input.text{
     box-sizing: border-box;
     width: 560px;
     height: 75px;
+    margin-right: 41px;
     padding-left: 32px;
     padding-top: 25px;
     padding-bottom: 25px;
@@ -68,12 +71,12 @@ input.text{
     background: #D9D9D9;
     color: #000;
     font-size: 36px;
-    text-align: left;
 }
 /* input do horário */
 input.time{
 box-sizing: border-box;
 color: #000;
+margin-right: 41px;
 padding-top: 16px;
 padding-left: 62px;
 font-size: 36px;
@@ -86,6 +89,7 @@ border-radius: 15px;
 input.date{
 box-sizing: border-box;
 color: #000;
+margin-left: auto;
 padding-left: 31px;
 padding-top: 19px;
 font-size: 26px;
@@ -99,10 +103,12 @@ border-radius: 15px;
 input.button{
 box-sizing: border-box;
 font-family: 'Roboto', sans-serif;
-margin-top: 48px;
-margin-left: 200%;
+display: flex;
+margin-left: auto;
+margin-right: auto;
+align-items: left;
+margin-top: 41px;
 padding-left: 90px;
-align-items: center;
 height: 54px;
 width: 264px;
 border-radius: 41px;
@@ -111,24 +117,22 @@ color: #D9D9D9;
 font-size: 32px;
 font-weight: 500;
 }
-svg{
-    max-width: 50%;
-    max-height: 50%;
-}
 
-/* menos dentro do botão*/
-#minus{
-    position: absolute;
-    margin-top: 27px;
-    margin-bottom: 48px;
-    margin-left: 11px;
+input.button:hover{
+    background-color: #212C14;
+    
 }
-
+div#check{
+    margin-top: auto;
+    margin-bottom: auto;
+    align-items: left;
+}
 button.exclusion{
-    width: 100px;
+    width: 50px;
     display: flex;
     height: 50px;
-    align-content: center;
+    margin-top: auto;
+    align-content: left;
     align-items: center;
     flex-wrap: nowrap;
     justify-content: center;
@@ -137,29 +141,33 @@ button.exclusion{
     color: transparent;
 }
 
-/* botão de excluir a tarefa */
-input.button1{
-    clip-path: circle();
-    background: #7E7E7E;
-    color: transparent;
-    margin-bottom: 24px;
-    margin-top: 14px;
-    margin-left: 0px;
+svg{
+    max-width: 50%;
+    max-height: 50%;
 }
 
-input.button:hover{
-    background-color: #212C14;
-    
+div#day{
+    margin-top: auto;
+    margin-bottom: auto;
 }
+span#hora{
+    color: #7E7E7E;
+}
+
 
 /* deixando os forms lado a lado */
 form#post{
 display: flex;
-flex-wrap: wrap
+justify-content: space-between;
+max-width: 90vw;
+margin-left: 10%;
+margin-right: 10%;
+flex-wrap: wrap;
 }
 
 /* lista de afazer */
 .list-group{
+display: flex;
 flex-direction: column;
 text-align: left;
 list-style-type: none;
@@ -167,9 +175,7 @@ list-style-type: none;
 
 .boxToDo{
     display: flex;
-    align-items: center;
     flex-direction: row;
-    justify-content: space-between;
     box-sizing: border-box;
     margin-bottom: 41px;
     margin-top: 41px;
@@ -184,16 +190,3 @@ list-style-type: none;
     border-radius: 36px;
     background: #D9D9D9;
 }
-/* 
-div.do-hour{
-display: flex;
-flex-direction: column;
-    text-align: left;
-    margin-left: 82px;
-}
-
-div#day{
-    display: flex;
-    float: right;
-    margin-top: 20px;
-} */

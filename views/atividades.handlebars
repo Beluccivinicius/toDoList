@@ -17,11 +17,10 @@
             {{!-- a propriedade name especifica no corpo da minha requisição o que é cada input --}}
             <input type="date" class="date" name="dataCerta" id="date">
         </div>
-        <br>
-        <div>
-            <input type="submit" class="button" value="POST">
-        </div>
     </form>
+    <div id="post">
+            <input type="submit" class="button" value="POST" id="posted">
+    </div>
 </div>
     <ul class="list-group">
         {{#each toDo}}
@@ -34,12 +33,13 @@
                             </svg>
                         </button>
                 </div>
-                    <div id="day">
-                        <span>dia {{this.dia}}/{{this.mes}}<span> 
-                    </div>
                     <div id="do-hour">
                         <span>{{this.oQueFazer}}</span>
-                        <span>{{this.horaCerta}}</span>
+                        <br>
+                        <span id="hora">{{this.horaCerta}}</span>
+                    </div>
+                    <div id="day">
+                        <span id="dia">dia {{this.dia}}/{{this.mes}}<span> 
                     </div>
             </li>
         {{/each}}
@@ -48,13 +48,13 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 const btn = document.getElementById('exclusion');
-const id = btn.value
-//meu btn.value está passando um valor indefinido para meu backAnd, decidi partir para 
-//um frot-and melhor para o que eu quero fazer
+const id = btn.values
+const btnPost = document.getElementById('posted')
+
 const deleted = (id) => {
     axios
         .delete('http://localhost:8000/atividades', {
-            id: id
+            id: btn.values
         })
         .then((res) => console.log(res))
         .catch((error) => {
@@ -68,10 +68,27 @@ const deleted = (id) => {
         });
 };
 
-btn.addEventListener('click', (e) => {
+btn.addEventListener('click', function(e){
     e.preventDefault();
     deleted(id);
 });
+
+const posted = () => {
+    axios.post('http://localhost:8000/atividades',{
+        body: form
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
+
+btnPost.addEventListener('click', function(e) {
+    e.preventDefault();
+    const form = document.getElementById("post")
+    console.log(form.getAll(oQueFazer))
+    const newForm = new FormData(form)
+    console.log(newForm)
+})
+
 </script>
 
 
