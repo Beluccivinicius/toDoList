@@ -19,7 +19,7 @@
         </div>
     </form>
     <div id="post">
-            <input type="submit" class="button" value="POST" id="post">
+            <input type="submit" class="button" value="POST" id="posted">
     </div>
 </div>
     <ul class="list-group">
@@ -48,17 +48,13 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 const btn = document.getElementById('exclusion');
-const id = btn.value
-const btnPost = document.getElementById('post')
-const form = document.getElementById("post");
+const id = btn.values
+const btnPost = document.getElementById('posted')
 
-
-//meu btn.value está passando um valor indefinido para meu backAnd, decidi partir para 
-//um frot-and melhor para o que eu quero fazer
 const deleted = (id) => {
     axios
         .delete('http://localhost:8000/atividades', {
-            id: id
+            id: btn.values
         })
         .then((res) => console.log(res))
         .catch((error) => {
@@ -72,7 +68,7 @@ const deleted = (id) => {
         });
 };
 
-btn.addEventListener('click', (e) => {
+btn.addEventListener('click', function(e){
     e.preventDefault();
     deleted(id);
 });
@@ -85,9 +81,12 @@ const posted = () => {
     .catch(err => console.log(err))
 }
 
-btnPost.addEventListener('click', (e) => {
+btnPost.addEventListener('click', function(e) {
     e.preventDefault();
-    console.log(form.value)
+    const form = document.getElementById("post")
+    console.log(form.getAll(oQueFazer))
+    const newForm = new FormData(form)
+    console.log(newForm)
 })
 
 </script>

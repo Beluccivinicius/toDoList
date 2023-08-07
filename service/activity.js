@@ -3,10 +3,9 @@ const uuid = require('uuid');
 
 const activitiesService = {
     create: async (activity) => {
-        // if (!activity.oQueFazer) {
-        //     return { msg: 'insira o que vamos fazer' };
-        // }
-
+        if (!activity.oQueFazer) {
+            return { msg: 'insira o que vamos fazer' };
+        }
         const { oQueFazer, dataCerta, horaCerta } = activity;
         const [ano, mes, dia] = activity.dataCerta.split('-');
         try {

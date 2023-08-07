@@ -26,7 +26,9 @@ h1 {
 div#do-hour{
 font-family: Roboto;
 font-size: 32px;
+margin-left: 41px;
 font-style: normal;
+align-items: left;
 font-weight: 300;
 line-height: thin;
 }
@@ -34,6 +36,8 @@ line-height: thin;
 div#day{
 font-family: Roboto;
 font-size: 24px;
+margin-right: 20px;
+margin-left: auto;
 font-style: normal;
 font-weight: 300;
 color: #7E7E7E;
@@ -155,6 +159,7 @@ span#hora{
 form#post{
 display: flex;
 justify-content: space-between;
+max-width: 90vw;
 margin-left: 10%;
 margin-right: 10%;
 flex-wrap: wrap;
@@ -171,7 +176,6 @@ list-style-type: none;
 .boxToDo{
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
     box-sizing: border-box;
     margin-bottom: 41px;
     margin-top: 41px;
