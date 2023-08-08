@@ -20,7 +20,7 @@ const activitiesService = {
         try {
             console.log(id);
             const excluison = await ToDoModel.deleteOne({ _id: `${id}` });
-            return;
+            return excluison;
         } catch (error) {
             console.log(error);
         }

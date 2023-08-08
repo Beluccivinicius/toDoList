@@ -10,12 +10,12 @@
         </div>
         <div>
             <label>Hora</label>
-            <input type="time" class="time" name="horaCerta" id="time">
+            <input type="time" name="horaCerta" id="time">
         </div>
         <div>
             <label>Dia</label>
             {{!-- a propriedade name especifica no corpo da minha requisição o que é cada input --}}
-            <input type="date" class="date" name="dataCerta" id="date">
+            <input type="date" name="dataCerta" id="date">
         </div>
     </form>
     <div id="post">
@@ -26,8 +26,9 @@
         {{#each toDo}}
             <li class="boxToDo" id="boxToDo">
                 <div id="check">
-                        <button type="submit" class="exclusion" name="id" value="{{this._id}}" id="exclusion">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit">
+                    <a></a>
+                        <button type="button" class="exclusion" value="{{this._id}}" id="exclusion-{{this._id}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit" value="{{this._id}}">
                                 <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
                                 <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
                             </svg>
@@ -47,14 +48,13 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-const btn = document.getElementById('exclusion');
-const id = btn.values
+const btn = document.getElementsByClassName('exclusion');
 const btnPost = document.getElementById('posted')
 
 const deleted = (id) => {
     axios
-        .delete('http://localhost:8000/atividades', {
-            id: btn.values
+        .delete(`http://localhost:8000/atividades/${id}`, {
+            _id: id
         })
         .then((res) => console.log(res))
         .catch((error) => {
@@ -68,14 +68,21 @@ const deleted = (id) => {
         });
 };
 
-btn.addEventListener('click', function(e){
-    e.preventDefault();
-    deleted(id);
-});
+function handleClick(event) {
+    const id = event.target.value;
+    deleted(id)
+}
 
-const posted = () => {
-    axios.post('http://localhost:8000/atividades',{
-        body: form
+for (let i = 0; i < btn.length; i++) {
+    btn[i].addEventListener('click', handleClick);
+
+
+const posted = (oQueFazer, dataCerta, horaCerta) => {
+    axios
+        .post('http://localhost:8000/atividades',{
+            oQueFazer,
+            dataCerta,
+            horaCerta
     })
     .then(res => console.log(res))
     .catch(err => console.log(err))
@@ -84,11 +91,12 @@ const posted = () => {
 btnPost.addEventListener('click', function(e) {
     e.preventDefault();
     const form = document.getElementById("post")
-    console.log(form.getAll(oQueFazer))
-    const newForm = new FormData(form)
-    console.log(newForm)
+    const formData = new FormData(form)
+    const formDataValues = [...formData]
+    const [oQueFazer, horaCerta, dataCerta] = formDataValues
+    posted(oQueFazer[1], dataCerta[1], horaCerta[1])
+    location.reload();
 })
-
 </script>
 
 

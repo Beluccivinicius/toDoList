@@ -3,10 +3,9 @@ const router = express.Router();
 const activitiesService = require('../service/activity');
 const ToDoModel = require('../model/toDoList');
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
     const { id } = req.params;
     try {
-        console.log(id);
         const toDo = await activitiesService.getAll();
         const deleted = await activitiesService.deleteOne(id);
         res.status(200).json(toDo);
