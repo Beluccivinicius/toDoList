@@ -1,11 +1,42 @@
 <body>
   <section id="infos">
   <h1>toDo list</h1>
-  <p> sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p id="explicationText"> 
+    Seja uma pessoa mais organizada registrando seus afazeres do dia a dia com o novo site toDo list.
+  </p>
   </section>
-    <img href="./images/fotoperfil.jpeg" height="198px" width="198px">
+    {{!-- <img href="./images/fotoperfil.jpeg" height="198px" width="198px"> --}}
   <section id="form">
-  <form action="/login" method="POST">
+    <form action="/login" method="post" id="post">
+      <div>
+        <label for="email" class="label">Email</label>
+        <input class="text" type="email" name="email" placeholder="nome@exemplo.com" id="email">
+      </div>
+      <div>
+        <label for="inputPassword" class="label">Senha</label>
+        <input class="text" type="password" name="senha" placeholder="senha" id="password">
+      </div>
+      {{#if noLogin}}
+        <p id="wrongMessage">Senha ou Email incorretos</p>
+      {{/if}}
+      <div>
+        <input type="submit" class="button" value="login" id="loggar">
+      </div>
+    </form>
+      <div id="criarConta">
+        <button data-target="div-hidden" role="button" id="createLogin">Criar conta</button>
+      </div>
+  </section>
+    <dialog id="inputArea">
+      <button type="button" class="exclusion" id="close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <path d="M44 22C44 34.1503 34.1503 44 22 44C9.84974 44 0 34.1503 0 22C0 9.84974 9.84974 0 22 0C34.1503 0 44 9.84974 44 22Z" fill="#7E7E7E"/>
+          <rect x="13.5342" y="12" width="25" height="4" rx="2" transform="rotate(37.8735 13.5342 12)" fill="#D9D9D9"/>
+          <rect x="11" y="27.2028" width="25" height="4" rx="2" transform="rotate(-37.1265 11 27.2028)" fill="#D9D9D9"/>
+        </svg>
+      </button>
+      <h2>Criar login</h2>
+      <form action="/login/" method="post" id="create">
     <div>
       <label for="email" class="label">Email</label>
       <input class="text" type="email" name="email" placeholder="nome@exemplo.com">
@@ -15,8 +46,52 @@
       <input class="text" type="password" name="senha" placeholder="senha">
     </div>
     <div>
-    <input type="submit" class="button" value="login">
+      <input type="submit" class="button" id="createUser">
     </div>
     </form>
-  </section>
+    </dialog>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+  const btnCreate = document.getElementById('createLogin')
+  const modal = document.getElementById('inputArea')
+  const btnClose = document.getElementById('close')
+  const btnNewUser = document.getElementById('createUser')
+
+  function post(e) {
+    e.preventDefault()
+    const email = getElementById('email')
+    const senha = getElementById('password')
+    console.log(email.value)
+  }
+
+  btnCreate.addEventListener('click', createLoggin)
+
+  function createLoggin() {
+    modal.showModal()
+  }
+
+  btnClose.addEventListener('click', function (e) {
+    e.preventDefault()
+    modal.close()
+  })
+
+  btnNewUser.addEventListener('click', function(e){
+    e.preventDefault()
+    const {email, senha} = document.getElementById("create")
+    console.log(email)
+    posted(email.value, senha.value)
+  })
+
+  const posted = (email, senha) => {
+    axios
+    .post(`http://localhost:8000/login/newUser`,{
+      email,
+      senha
+    })
+    .then(res => console.log(res))
+    .catch(res => console.log(res))
+  }
+
+</script>

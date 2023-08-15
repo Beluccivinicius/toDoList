@@ -4,7 +4,7 @@ const uuid = require('uuid');
 const activitiesService = {
     create: async (activity) => {
         if (!activity.oQueFazer) {
-            return { msg: 'insira o que vamos fazer' };
+            return console.log('insira o que vamos fazer');
         }
         const { oQueFazer, dataCerta, horaCerta } = activity;
         const [ano, mes, dia] = activity.dataCerta.split('-');
@@ -16,11 +16,11 @@ const activitiesService = {
             return null;
         }
     },
+
     deleteOne: async (id) => {
         try {
-            console.log(id);
             const excluison = await ToDoModel.deleteOne({ _id: `${id}` });
-            return;
+            return excluison;
         } catch (error) {
             console.log(error);
         }
