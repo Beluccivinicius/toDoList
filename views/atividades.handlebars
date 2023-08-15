@@ -18,7 +18,7 @@
             <input type="date" name="dataCerta" id="date">
         </div>
     </form>
-    <div id="post">
+    <div>
             <input type="submit" class="button" value="POST" id="posted">
     </div>
 </div>
@@ -26,9 +26,8 @@
         {{#each toDo}}
             <li class="boxToDo" id="boxToDo">
                 <div id="check">
-                    <a></a>
-                        <button type="button" class="exclusion" value="{{this._id}}" id="exclusion-{{this._id}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none" type="submit" value="{{this._id}}">
+                        <button type="button" class="exclusion" value="{{this._id}}" id="exclusion-{{this._id}}" onclick="handleClick('{{this._id}}')">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none">
                                 <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
                                 <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
                             </svg>
@@ -47,16 +46,17 @@
     </ul>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
-const btn = document.getElementsByClassName('exclusion');
-const btnPost = document.getElementById('posted')
+    const btnExcluison = document.getElementsByClassName('exclusion');
+    const btnPost = document.getElementById('posted')
 
 const deleted = (id) => {
     axios
         .delete(`http://localhost:8000/atividades/${id}`, {
             _id: id
         })
-        .then((res) => console.log(res))
+        .then((res) => location.reload())
         .catch((error) => {
             if (error.request) {
                 console.log('sem resposta servidor');
@@ -68,13 +68,9 @@ const deleted = (id) => {
         });
 };
 
-function handleClick(event) {
-    const id = event.target.value;
-    deleted(id)
+async function handleClick(id) {
+    deleted(id);
 }
-
-for (let i = 0; i < btn.length; i++) {
-    btn[i].addEventListener('click', handleClick);
 
 
 const posted = (oQueFazer, dataCerta, horaCerta) => {
@@ -84,19 +80,15 @@ const posted = (oQueFazer, dataCerta, horaCerta) => {
             dataCerta,
             horaCerta
     })
-    .then(res => console.log(res))
+    .then(res => location.reload())
     .catch(err => console.log(err))
 }
 
-btnPost.addEventListener('click', function(e) {
+btnPost.addEventListener('click', async function(e) {
     e.preventDefault();
-    const form = document.getElementById("post")
-    const formData = new FormData(form)
-    const formDataValues = [...formData]
-    const [oQueFazer, horaCerta, dataCerta] = formDataValues
-    posted(oQueFazer[1], dataCerta[1], horaCerta[1])
-    location.reload();
-})
+    const {oQueFazer, dataCerta, horaCerta} = document.getElementById("post");
+    await posted(oQueFazer.value, dataCerta.value, horaCerta.value);
+});
 </script>
 
 

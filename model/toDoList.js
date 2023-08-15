@@ -5,12 +5,31 @@ const { Schema } = mongoose;
 
 const toDoSchema = new Schema(
     {
-        oQueFazer: String,
-        dia: String,
-        mes: String,
-        ano: String,
-        horaCerta: String,
-        prioridade: String
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Login'
+        },
+        oQueFazer: {
+            type: String,
+            required: true
+        },
+        dia: {
+            type: String,
+            required: false
+        },
+        mes: {
+            type: String,
+            required: false
+        },
+        ano: {
+            type: String,
+            required: false
+        },
+        horaCerta: {
+            type: String,
+            required: false
+        }
     },
     { timeStamp: true }
 );

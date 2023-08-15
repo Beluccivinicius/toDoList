@@ -6,6 +6,25 @@
 input {
     all: unset;
 }
+button{
+    all:unset;
+}
+/* Criar Contas */
+button#createLogin{
+    all: unset;
+    display: grid;
+    justify-content: space-evenly;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 28px;
+    font-size: 24px;
+    color: rgba(133, 152, 118, 1)
+}
+
+button#createLogin:hover{
+    text-decoration: underline;
+}
 /* titulo */
 h1 {
     display: flex;
@@ -21,24 +40,38 @@ h1 {
 p{
     display: flex;
     font-family: 'Roboto', sans-serif;
-    justify-content:stretch;
     color: #fff;
-    font-size: 24px;
-    margin-top: 95px;
+    margin-top: 28px;
+}
+
+/* menssagem de erro */
+p#wrongMessage{
+    align-items: center;
+    font-size: 20px;
+    color: #FF4747;
+    text-decoration: underline;
+}
+
+p.explicationText{
+    font-size: 28px;
+    margin-top: 67px;
+    justify-content:stretch;
 }
 /* posicionamento do quadrado verde */
-.infos{ box-sizing: border-box; }
 #infos{
     flex-direction: column;
     float: left;
+    margin-right: 0px;
+    display: flex;
     width: 40%;
+    height: 100vh;
     padding-top: 143px;
     padding-left: 50px;
     padding-right: 50px;
-    padding-bottom: 400px;
     border-radius: 0px 36px 36px 0px;
     background: #859876;
 }
+
 /* etiqueta dos inputs */
 label{
     color: #D9D9D9;
@@ -51,17 +84,19 @@ label{
     display: block;
     margin-bottom: 10px;
 }
-/* espaço para escrever o email e a senha, posicionando a direita*/
-#form{
-    display: flex;
-    float: right;
-    padding-top: 20%;
-    padding-right: 106px;
-}
+
+
 /* deixando eles alinhados em coluna */
-#form div{
-    flex-direction: column;
-    margin-bottom: 72px;
+form#post{
+    display: grid;
+    justify-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: auto;
+    padding-top: 200px;
+    margin-bottom: 28px;
 }
 /* estilizando o submit de texto */
 input.text{
@@ -70,7 +105,7 @@ input.text{
     padding-left: 32px;
     padding-top: 13px;
     border-radius: 16px;
-    margin-left: 40px;
+    margin-bottom: 28px;
     background: #D9D9D9;
 }
 /* estilizando o botão com o id botton */
@@ -78,30 +113,71 @@ input.text{
 input.button{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    margin-top: 48px;
-    margin-left: 204px;
+    margin-top: 28px;
     padding-left: 90px;
-    align-items: center;
     height: 54px;
     width: 264px;
     border-radius: 41px;
-    background: #859876;
+    background: #212C14;
     color: #D9D9D9;
     font-size: 32px;
     font-weight: 500;
     }
 
-    input.button:hover{
-        background-color: #212C14;
-        
-    }
-
 input::placeholder{
-color: #7B8476;
-font-size: 32px;
-font-weight: 200;
+    color: #7B8476;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    font-weight: 300;
 }
 
 body {
     background: #373737;
+}
+
+dialog#inputArea{
+    margin: none;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 80px;
+    padding-right: 80px;
+    padding-left: 80px;
+    border-radius: 36px;
+    border: none;
+    margin: auto;
+    background-color: #859876;
+    box-shadow:  0 0 1em rgba(0, 0, 0, 0.3) ;
+}
+
+dialog::backdrop{
+    background: rgba(55, 55, 55, 0.8);
+}
+
+form#createLogin{
+    display: grid;
+    justify-items: center;
+    justify-content: space-evenly;
+}
+
+h2{
+    text-align: center;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 60px;
+    font-size: 60px;
+    margin-bottom: 28px;
+}
+button.exclusion{
+    width: 50px;
+    display: flex;
+    float: right;
+    height: 50px;
+    margin-top: auto;
+    align-content: left;
+    align-items: center;
+    justify-content: center;
+    clip-path: circle();
+    background: #7E7E7E;
+    color: transparent;
 }

@@ -7,7 +7,8 @@ const loginSchema = new Schema(
     {
         email: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         senha: {
             type: String,
