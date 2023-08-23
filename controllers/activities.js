@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const activitiesService = require('../service/activities');
-const ToDoModel = require('../model/toDoList');
+const ToDoModel = require('../model/Activities');
+const { protect } = require('../middleware/authMiddleware');
 
 router.delete('/:id', async (req, res, next) => {
     const { id } = req.params;
@@ -15,11 +16,12 @@ router.delete('/:id', async (req, res, next) => {
     }
 });
 
-router.get('/', async (req, res, next) => {
+router.get('/', protect, async (req, res, next) => {
     try {
-        const toDo = await activitiesService.getAll();
+        const toDo = await activitiesService.find({ user: req.user });
+        console.log(toDo);
         res.render('atividades', {
-            style: 'atividades.css',
+            style: 'activities.css',
             script: 'atividades.js',
             toDo
         });

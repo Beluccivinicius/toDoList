@@ -168,7 +168,7 @@ h2{
     font-size: 60px;
     margin-bottom: 28px;
 }
-button.exclusion{
+button.close{
     width: 50px;
     display: flex;
     float: right;
