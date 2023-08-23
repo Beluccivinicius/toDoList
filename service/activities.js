@@ -1,4 +1,4 @@
-const ToDoModel = require('../model/toDoList');
+const ToDoModel = require('../model/Activities');
 const uuid = require('uuid');
 
 const activitiesService = {
@@ -9,7 +9,7 @@ const activitiesService = {
         const { oQueFazer, dataCerta, horaCerta } = activity;
         const [ano, mes, dia] = activity.dataCerta.split('-');
         try {
-            const post = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta });
+            const post = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta, admin: false });
             return;
         } catch (error) {
             console.log(error);

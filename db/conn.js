@@ -3,7 +3,7 @@ require('dotenv').config();
 const variavelSenha = process.env.DB_PASSWORD;
 const variavelUser = process.env.DB_USER;
 
-async function main() {
+main = async () => {
     try {
         mongoose.set('strictQuery', true);
 
@@ -13,6 +13,6 @@ async function main() {
     } catch (error) {
         console.log(`erro ${error}`);
     }
-}
+};
 
 module.exports = main;

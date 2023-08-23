@@ -13,6 +13,10 @@ const loginSchema = new Schema(
         senha: {
             type: String,
             required: true
+        },
+        token: {
+            type: String,
+            required: false
         }
     },
     { timestamps: true }

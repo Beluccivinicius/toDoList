@@ -12,7 +12,7 @@ const toDoSchema = new Schema(
         },
         oQueFazer: {
             type: String,
-            required: true
+            required: false
         },
         dia: {
             type: String,
