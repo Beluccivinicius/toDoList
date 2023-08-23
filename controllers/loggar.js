@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const loggarServices = require('../service/loggar');
 const asyncHandler = require('express-async-handler');
-const bcrypt = require('bcrypt');
-const { protect } = require('../middleware/authMiddleware');
-const axios = require('axios');
+const generateToken = require('../Utils/generateToken');
 
 router.get('/', (req, res) =>
     res.render('login', {
@@ -16,15 +14,13 @@ router.get('/', (req, res) =>
 router.post(
     '/',
     asyncHandler(async (req, res, next) => {
-        const { email, senha } = req.body;
         const compare = await loggarServices.login(req.body);
-
-        console.log(`${compare.newToken} oi ${compare.emailMember}`);
+        console.log(`${compare} oi`);
         if (compare) {
-            res.status(201).json({
-                _id: user._id,
-                name: user.name,
-                email: user.email
+            const newToken = generateToken(res, compare._id);
+            res.status(200).render('atividades', {
+                style: 'activities.css',
+                noLogin: false
             });
         } else {
             res.status(500).render('login', {
@@ -41,6 +37,11 @@ router.post(
     asyncHandler(async (req, res, next) => {
         const newLoggin = req.body;
         const emailCreate = await loggarServices.createAccount(newLoggin);
+
+        if (emailCreate) {
+            let token;
+            token = generateToken(res, emailCreate);
+        }
         res.json(emailCreate);
     })
 );
