@@ -2,14 +2,14 @@ const ToDoModel = require('../model/Activities');
 const uuid = require('uuid');
 
 const activitiesService = {
-    create: async (activity) => {
+    create: async (activity, id) => {
         if (!activity.oQueFazer) {
             return console.log('insira o que vamos fazer');
         }
         const { oQueFazer, dataCerta, horaCerta } = activity;
         const [ano, mes, dia] = activity.dataCerta.split('-');
         try {
-            const post = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta, admin: false });
+            const post = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta, user: id });
             return;
         } catch (error) {
             console.log(error);
@@ -25,9 +25,9 @@ const activitiesService = {
             console.log(error);
         }
     },
-    getAll: async () => {
+    getAll: async (id) => {
         try {
-            const getAll = await ToDoModel.find();
+            const getAll = await ToDoModel.find({ id });
             return getAll.map((doc) => doc.toObject());
         } catch (error) {
             console.log(error);

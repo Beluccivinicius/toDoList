@@ -3,22 +3,25 @@ const asyncHandler = require('express-async-handler');
 const Login = require('../model/Loggar');
 
 const protect = asyncHandler(async (req, res, next) => {
-    const token = req.header.autorization;
+    let token;
+
+    token = req.cookies.jwt;
+
     if (token) {
         try {
-            const tokenJwt = jwt.verify(token, process.env.JWT_SECRET);
-
-            req.user = await Login.findOne(tokenJwt.login).select('-senha');
-            if (tokenJwt.id == req.user.id) {
-                next();
-            }
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            console.log(decoded.id);
+            const id = decoded.id;
+            req.user = await Login.findOne({ id }).select('-senha');
+            console.log(req.user);
+            next();
         } catch (error) {
             console.log(error);
-            res.status(401).json('não autorizado');
+            res.status(401).json('não autorizado, token invalido');
             return;
         }
     } else {
-        res.status(401).json('não autorizado');
+        res.status(401).json('não autorizado, sem token');
     }
 });
 

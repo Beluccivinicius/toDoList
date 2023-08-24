@@ -4,24 +4,20 @@ const loggarServices = require('../service/loggar');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../Utils/generateToken');
 
-router.get('/', (req, res) =>
+router.get('/', async (req, res) => {
     res.render('login', {
         style: 'loggar.css'
-    })
-);
+    });
+});
 
 //processo de login
 router.post(
     '/',
     asyncHandler(async (req, res, next) => {
         const compare = await loggarServices.login(req.body);
-        console.log(`${compare} oi`);
         if (compare) {
             const newToken = generateToken(res, compare._id);
-            res.status(200).render('atividades', {
-                style: 'activities.css',
-                noLogin: false
-            });
+            res.status(200).redirect('/atividades');
         } else {
             res.status(500).render('login', {
                 style: 'loggar.css',

@@ -15,7 +15,6 @@ const loginServices = {
     createAccount: asyncHandler(async (newLogin) => {
         const { email, senha } = newLogin;
         const compare = await Login.find({ email });
-        console.log(compare);
         if (compare.length > 0) {
             return console.log((emailCreate = true));
         } else {

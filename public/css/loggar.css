@@ -95,7 +95,7 @@ form#post{
     margin-left: auto;
     margin-right: auto;
     padding: auto;
-    padding-top: 200px;
+    padding-top: 77px;
     margin-bottom: 28px;
 }
 /* estilizando o submit de texto */
@@ -180,4 +180,10 @@ button.exclusion{
     clip-path: circle();
     background: #7E7E7E;
     color: transparent;
+}
+
+img#imagePerfil{
+    display: grid;
+    margin: auto;
+    padding-top: 70px;
 }

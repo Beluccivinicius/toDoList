@@ -18,8 +18,8 @@ router.delete('/:id', async (req, res, next) => {
 
 router.get('/', protect, async (req, res, next) => {
     try {
-        const toDo = await activitiesService.find({ user: req.user });
-        console.log(toDo);
+        const token = req.user._id;
+        const toDo = await activitiesService.getAll(token);
         res.render('atividades', {
             style: 'activities.css',
             script: 'atividades.js',
@@ -27,22 +27,27 @@ router.get('/', protect, async (req, res, next) => {
         });
     } catch (error) {
         res.status(500).end('Deu erro');
+        console.log(error);
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', protect, async (req, res, next) => {
     try {
         const activity = req.body;
-        await activitiesService.create(activity);
-        const toDo = await activitiesService.getAll();
-        res.render('atividades', {
-            style: 'atividades.css',
-            script: 'atividades.js',
-            toDo
-        });
+        const token = req.user._id;
+        await activitiesService.create(activity, token._id);
     } catch (error) {
         res.status(500).end('Deu erro');
+        console.log(error);
     }
+});
+
+router.post('/logout', async function logoutUser(req, res) {
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    });
+    res.status(200).json({ message: 'Logged out successfully' });
 });
 
 router.patch('/:id', async (req, res, next) => {

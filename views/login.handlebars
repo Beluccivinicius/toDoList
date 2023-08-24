@@ -5,7 +5,7 @@
     Seja uma pessoa mais organizada registrando seus afazeres do dia a dia com o novo site toDo list.
   </p>
   </section>
-    {{!-- <img href="./images/fotoperfil.jpeg" height="198px" width="198px"> --}}
+    <img id="imagePerfil" src='images/fotoperfil.jpeg' height="198px" width="198px">
   <section id="form">
     <form action="/login" method="post" id="post">
       <div>
@@ -20,7 +20,7 @@
         <p id="wrongMessage">Senha ou Email incorretos</p>
       {{/if}}
       <div>
-        <input type="submit" class="button" value="login" id="loggar">
+        <input type="submit" name="loggar" class="button" value="login" id="loggar">
       </div>
     </form>
       <div id="criarConta">
@@ -52,46 +52,4 @@
     </dialog>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<script>
-  const btnCreate = document.getElementById('createLogin')
-  const modal = document.getElementById('inputArea')
-  const btnClose = document.getElementById('close')
-  const btnNewUser = document.getElementById('createUser')
-
-  function post(e) {
-    e.preventDefault()
-    const email = getElementById('email')
-    const senha = getElementById('password')
-    console.log(email.value)
-  }
-
-  btnCreate.addEventListener('click', createLoggin)
-
-  function createLoggin() {
-    modal.showModal()
-  }
-
-  btnClose.addEventListener('click', function (e) {
-    e.preventDefault()
-    modal.close()
-  })
-
-  btnNewUser.addEventListener('click', function(e){
-    e.preventDefault()
-    const {email, senha} = document.getElementById("create")
-    console.log(email)
-    posted(email.value, senha.value)
-  })
-
-  const posted = (email, senha) => {
-    axios
-    .post(`http://localhost:8000/login/newUser`,{
-      email,
-      senha
-    })
-    .then(res => console.log(res))
-    .catch(res => console.log(res))
-  }
-
-</script>
+<script src='/js/loggar.js'></script>
