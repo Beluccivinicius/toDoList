@@ -13,10 +13,11 @@ const loginServices = {
         return;
     }),
     createAccount: asyncHandler(async (newLogin) => {
+        let emailCreate;
         const { email, senha } = newLogin;
         const compare = await Login.find({ email });
         if (compare.length > 0) {
-            return console.log((emailCreate = true));
+            return (emailCreate = true);
         } else {
             const salt = await bcrypt.genSalt(10);
             const hashSenha = await bcrypt.hash(senha, salt);

@@ -27,7 +27,7 @@ const activitiesService = {
     },
     getAll: async (id) => {
         try {
-            const getAll = await ToDoModel.find({ id });
+            const getAll = await ToDoModel.find({ user: id });
             return getAll.map((doc) => doc.toObject());
         } catch (error) {
             console.log(error);

@@ -193,3 +193,83 @@ list-style-type: none;
     border-radius: 36px;
     background: #D9D9D9;
 }
+/* botão de menu */
+
+button#buttonMenu{
+    display: grid;
+    position: fixed;
+    width: 124px;
+    height: 124px;
+    top: 78px;
+    left: 80vw;
+}
+dialog#menu::backdrop{
+    background: rgba(55, 55, 55, 0.8)
+}
+button#btnCloseModal{
+    margin-top: 0px;
+    margin-left: 68px;
+    margin-right: 10px;
+    margin-bottom: 46px;
+    background: #859876;
+    width: 80px;
+    height: 80px;
+}
+
+dialog#menu{
+    box-sizing: border-box;
+    position: fixed;
+    border-radius: 51px;
+    background: #859876;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 368px;
+    height: 416px;
+    align-items: center;
+    top: 75px;
+    left: 60vw;
+    border: none;
+    padding-left: 39px;
+    padding-top: 0px;
+}
+    a{
+        text-decoration: none;
+    }
+
+    hr{
+        margin-bottom: 21px;
+        border-color: #212C14;
+        border-radius: 10px;
+        width: 277px;
+        stroke-width: 3px;
+        color: #212C14; 
+    }
+
+ul#menuList li{
+    border-bottom: #212C14;
+    color: #D9D9D9;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding-bottom: 21px;
+    list-style:none;
+}
+div#headerMenu{
+    display: flex;
+    align-items: left;
+}
+h3{
+    margin-left: 90px;
+    margin-top: 64px;
+    margin-bottom: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    color: #D9D9D9;
+    align-items: center;
+}
+button#buttonClose{
+    float: right;
+    margin-right: 65px;
+    margin-top: 20px;
+}

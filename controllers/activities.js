@@ -19,6 +19,7 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/', protect, async (req, res, next) => {
     try {
         const token = req.user._id;
+        console.log(`${token} ooiiiiii`);
         const toDo = await activitiesService.getAll(token);
         res.render('atividades', {
             style: 'activities.css',
@@ -47,7 +48,7 @@ router.post('/logout', async function logoutUser(req, res) {
         httpOnly: true,
         expires: new Date(0)
     });
-    res.status(200).json({ message: 'Logged out successfully' });
+    res.status(200).redirect('/login');
 });
 
 router.patch('/:id', async (req, res, next) => {

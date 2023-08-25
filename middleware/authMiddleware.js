@@ -21,7 +21,7 @@ const protect = asyncHandler(async (req, res, next) => {
             return;
         }
     } else {
-        res.status(401).json('não autorizado, sem token');
+        res.status(401).redirect('/login');
     }
 });
 
