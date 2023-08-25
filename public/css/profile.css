@@ -1,0 +1,83 @@
+body{
+    background: #373737;
+}
+
+button{
+    all:unset
+}
+
+div#background{
+    width: 984px;
+    height: 1014px;
+    background-color: #859876;
+    border-radius: 51px;
+    margin: auto;
+    display: grid;
+}
+
+div#photoPerfil{
+    clip-path: circle();
+    display: grid;
+    justify-content: center;
+    margin-left: 393px;
+    width: 198px;
+    margin-top: 16px;
+    background-color: #FFF;
+    align-items: center;
+}
+
+label{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    display: block;
+    margin-left: 175px;
+    margin-top: 24px;
+    margin-bottom: 14px;
+}
+
+input{
+    all:unset;
+    width: 560px;
+    height: 39px;
+    background: #D9D9D9;
+    border-radius: 16px;
+    margin-left: 235px;
+    padding-left: 20px;
+}
+
+hr{
+    width: 671px;
+    margin-top: 41px;
+    border-color: #212C14;
+}
+
+h3{
+    all: unset;
+    color: #FFF;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: 600;
+    display: grid;
+    align-items: center;
+}
+
+a{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
+    margin-left: 402px;
+}
+a#btnClose{
+    margin-top: 28px;
+    margin-left: 900px;
+    margin-bottom: 0;
+    align-content: center;
+}

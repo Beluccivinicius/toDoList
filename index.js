@@ -19,8 +19,9 @@ const conn = require('./db/conn');
 conn();
 
 //router
-app.use('/atividades', require('./controllers/activities'));
-app.use('/login', require('./controllers/loggar'));
+app.use('/atividades', require('./controllers/activities.js'));
+app.use('/login', require('./controllers/loggar.js'));
+app.use('/perfil', require('./controllers/profile.js'));
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

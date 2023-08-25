@@ -4,6 +4,7 @@ const loggarServices = require('../service/loggar');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../Utils/generateToken');
 
+//load '/login'
 router.get('/', async (req, res) => {
     res.render('login', {
         style: 'loggar.css'

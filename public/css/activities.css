@@ -3,6 +3,9 @@
     padding:0;
     outline: unset;
 }
+a{
+    all: unset;
+}
 input {
     all: unset;
 }
@@ -194,12 +197,9 @@ list-style-type: none;
     background: #D9D9D9;
 }
 /* botão de menu */
-
 button#buttonMenu{
     display: grid;
     position: fixed;
-    width: 124px;
-    height: 124px;
     top: 78px;
     left: 80vw;
 }

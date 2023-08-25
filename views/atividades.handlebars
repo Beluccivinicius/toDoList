@@ -42,9 +42,9 @@
             </button>
             </div>
             <ul id="menuList">
-            <li><a id="goToPerfil">Perfil</a></li>
+            <li><a href="/perfil" id="goToPerfil">Perfil</a></li>
             <hr>
-            <li><a id="goToFriends">Recomendar para amigos</a></li>
+            <li><a id="goTohistoric">histórico afazer</a></li>
             <hr>
             <li><a id="linkOut">Sair</a></li>
             <hr>
@@ -96,66 +96,4 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script>
-    const modal = document.getElementById('menu')
-    const btnExcluison = document.getElementsByClassName('exclusion');
-    const btnPost = document.getElementById('posted')
-    const btnMenu  = document.getElementById('buttonMenu')
-    const btnCloseModal = document.getElementById('btnCloseModal')
-
-    btnCloseModal.addEventListener('click', function(e) {
-        modal.close()
-    })
-    btnMenu.addEventListener('click', function(e) {
-    e.preventDefault()
-    modal.showModal()
-    })
-
-    const linkOut = document.getElementById('linkOut')
-        linkOut.addEventListener('click' , function(e) {
-            axios.post('http://localhost:8000/atividades/logout')
-            .then((res) => location.reload())
-            .catch((err) => console.log(err))
-        })
-
-const deleted = (id) => {
-    axios
-        .delete(`http://localhost:8000/atividades/${id}`, {
-            _id: id
-        })
-        .then((res) => location.reload())
-        .catch((error) => {
-            if (error.request) {
-                console.log('sem resposta servidor');
-            } else if (error.response) {
-                console.log('Erro de resposta do servidor');
-            } else {
-                console.log('Erro ao fazer a solicitação');
-            }
-        });
-};
-
-async function handleClick(id) {
-    deleted(id);
-}
-
-
-const posted = (oQueFazer, dataCerta, horaCerta) => {
-    axios
-        .post('http://localhost:8000/atividades',{
-            oQueFazer,
-            dataCerta,
-            horaCerta
-    })
-    .then(res => location.reload(res))
-    .catch(err => console.log(err))
-}
-
-btnPost.addEventListener('click', async function(e) {
-    e.preventDefault();
-    const {oQueFazer, dataCerta, horaCerta} = document.getElementById("post");
-    await posted(oQueFazer.value, dataCerta.value, horaCerta.value);
-});
-</script>
-
-
+<script src="/js/activities.js"></script>
