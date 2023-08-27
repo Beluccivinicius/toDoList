@@ -9,7 +9,7 @@ const activitiesService = {
         const { oQueFazer, dataCerta, horaCerta } = activity;
         const [ano, mes, dia] = activity.dataCerta.split('-');
         try {
-            const post = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta, user: id });
+            await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta, user: id });
             return;
         } catch (error) {
             console.log(error);

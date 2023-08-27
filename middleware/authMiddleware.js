@@ -5,15 +5,14 @@ const Login = require('../model/Loggar');
 const protect = asyncHandler(async (req, res, next) => {
     let token;
 
-    token = req.cookies.jwt;
+    token = req.cookies.jasonWebToken;
 
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             console.log(decoded.id);
             const id = decoded.id;
-            req.user = await Login.findOne({ id }).select('-senha');
-            console.log(req.user);
+            await Login.findOne({ id }).select('-senha');
             next();
         } catch (error) {
             console.log(error);

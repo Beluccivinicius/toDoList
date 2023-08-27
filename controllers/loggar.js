@@ -17,8 +17,16 @@ router.post(
     asyncHandler(async (req, res, next) => {
         const compare = await loggarServices.login(req.body);
         if (compare) {
-            const newToken = generateToken(res, compare._id);
-            res.status(200).redirect('/atividades');
+            const newToken = await generateToken(res, compare);
+            const id = compare._id;
+            res.cookie('id', id);
+            res.cookie('jasonWebToken', newToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
+                sameSite: 'strict', // Prevent CSRF attacks
+                maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+            });
+            res.redirect('/atividades');
         } else {
             res.status(500).render('login', {
                 style: 'loggar.css',

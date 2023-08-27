@@ -21,7 +21,6 @@ div#photoPerfil{
     justify-content: center;
     margin-left: 393px;
     width: 198px;
-    margin-top: 16px;
     background-color: #FFF;
     align-items: center;
 }
@@ -80,4 +79,6 @@ a#btnClose{
     margin-left: 900px;
     margin-bottom: 0;
     align-content: center;
+    width: 47px;
+    height: 47px;
 }

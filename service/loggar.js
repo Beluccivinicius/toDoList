@@ -8,7 +8,8 @@ const loginServices = {
         const { email, senha } = login;
         const loginCerto = await Login.findOne({ email });
         if (loginCerto && (await bcrypt.compare(senha, loginCerto.senha))) {
-            return loginCerto;
+            console.log(`${loginCerto._id} mama eu`);
+            return loginCerto._id;
         }
         return;
     }),

@@ -54,7 +54,7 @@ const posted = (oQueFazer, dataCerta, horaCerta) => {
             dataCerta,
             horaCerta
         })
-        .then((res) => location.reload(res))
+        .then((res) => location.reload())
         .catch((err) => console.log(err));
 };
 btnPost.addEventListener('click', async function (e) {

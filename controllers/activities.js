@@ -7,9 +7,8 @@ const { protect } = require('../middleware/authMiddleware');
 //get '/atividades'
 router.get('/', protect, async (req, res, next) => {
     try {
-        const token = req.user._id;
-        console.log(`${token} ooiiiiii`);
-        const toDo = await activitiesService.getAll(token);
+        const id = req.cookies.id;
+        const toDo = await activitiesService.getAll(id);
         res.render('atividades', {
             style: 'activities.css',
             toDo
@@ -24,8 +23,8 @@ router.get('/', protect, async (req, res, next) => {
 router.post('/', protect, async (req, res, next) => {
     try {
         const activity = req.body;
-        const token = req.user._id;
-        await activitiesService.create(activity, token._id);
+        const id = req.cookies.id;
+        await activitiesService.create(activity, id);
     } catch (error) {
         res.status(500).end('Deu erro');
         console.log(error);
@@ -34,10 +33,11 @@ router.post('/', protect, async (req, res, next) => {
 
 //logOut '/login'
 router.post('/logout', async function logoutUser(req, res) {
-    res.cookie('jwt', '', {
+    res.cookie('jasonWebToken', '', {
         httpOnly: true,
         expires: new Date(0)
     });
+    res.cookie('id', '');
     res.status(200).redirect('/login');
 });
 
