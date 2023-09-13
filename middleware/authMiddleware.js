@@ -8,17 +8,11 @@ const protect = asyncHandler(async (req, res, next) => {
     token = req.cookies.jasonWebToken;
 
     if (token) {
-        try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decoded.id);
-            const id = decoded.id;
-            await Login.findOne({ id }).select('-senha');
-            next();
-        } catch (error) {
-            console.log(error);
-            res.status(401).json('não autorizado, token invalido');
-            return;
-        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log(decoded.id);
+        const id = decoded.id;
+        await Login.findOne({ id }).select('-senha');
+        next();
     } else {
         res.status(401).redirect('/login');
     }

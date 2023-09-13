@@ -5,18 +5,21 @@ const asyncHandler = require('express-async-handler');
 const generateToken = require('../Utils/generateToken');
 
 //load '/login'
-router.get('/', async (req, res) => {
-    const imgList = [];
-    const id = req.cookies.id;
-    imgList.push({ src: `/users/${id}_profilePhoto.png` });
-    if (imgList.length < 1) {
-        imgList.push({ src: '/images/fotoperfildefault.svg' });
-    }
-    res.render('login', {
-        style: 'loggar.css',
-        imgList: imgList
-    });
-});
+router.get(
+    '/',
+    asyncHandler(async (req, res) => {
+        const imgList = [];
+        const id = req.cookies.id;
+        imgList.push({ src: `/users/${id}_profilePhoto.png` });
+        if (imgList.length < 1) {
+            imgList.push({ src: '/images/fotoperfildefault.svg' });
+        }
+        res.render('login', {
+            style: 'loggar.css',
+            imgList: imgList
+        });
+    })
+);
 
 //processo de login
 router.post(

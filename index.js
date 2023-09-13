@@ -1,5 +1,6 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
+const { notFound, errorHandler } = require('./middleware/errMiddleware.js');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -22,6 +23,10 @@ conn();
 app.use('/atividades', require('./controllers/activities.js'));
 app.use('/login', require('./controllers/loggar.js'));
 app.use('/perfil', require('./controllers/profile.js'));
+
+//tratamento de erro das APIs
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

@@ -6,12 +6,12 @@ const btnCloseModal = document.getElementById('btnCloseModal');
 const linkOut = document.getElementById('linkOut');
 const linksMenu = document.getElementsByClassName('linksMenu');
 
+//animação botão excluir
 function buttonX(id) {
     const img = document.getElementById(`button${id}`);
     img.src = './images/botaoexcluir.svg';
     console.log(img);
 }
-
 function buttonMenos(id) {
     const img = document.getElementById(`button${id}`);
     img.src = './images/botaomenos.svg';
@@ -53,6 +53,7 @@ function deleted(id) {
             }
         });
 }
+
 //addEventListener in html
 async function handleClick(id) {
     deleted(id);
@@ -60,6 +61,11 @@ async function handleClick(id) {
 
 //post
 //new toDo
+btnPost.addEventListener('click', async function (e) {
+    e.preventDefault();
+    const { oQueFazer, dataCerta, horaCerta } = document.getElementById('post');
+    posted(oQueFazer.value, dataCerta.value, horaCerta.value);
+});
 const posted = (oQueFazer, dataCerta, horaCerta) => {
     axios
         .post('http://localhost:8000/atividades', {
@@ -70,8 +76,3 @@ const posted = (oQueFazer, dataCerta, horaCerta) => {
         .then((res) => location.reload())
         .catch((err) => console.log(err));
 };
-btnPost.addEventListener('click', async function (e) {
-    e.preventDefault();
-    const { oQueFazer, dataCerta, horaCerta } = document.getElementById('post');
-    await posted(oQueFazer.value, dataCerta.value, horaCerta.value);
-});
