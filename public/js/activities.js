@@ -64,15 +64,19 @@ async function handleClick(id) {
 btnPost.addEventListener('click', async function (e) {
     e.preventDefault();
     const { oQueFazer, dataCerta, horaCerta } = document.getElementById('post');
-    posted(oQueFazer.value, dataCerta.value, horaCerta.value);
+    const resultado = await posted(oQueFazer.value, dataCerta.value, horaCerta.value);
+    location.reload();
 });
-const posted = (oQueFazer, dataCerta, horaCerta) => {
+
+async function posted(oQueFazer, dataCerta, horaCerta) {
     axios
         .post('http://localhost:8000/atividades', {
             oQueFazer,
             dataCerta,
             horaCerta
         })
-        .then((res) => location.reload())
+        .then((res) => {
+            return;
+        })
         .catch((err) => console.log(err));
-};
+}

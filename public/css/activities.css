@@ -201,6 +201,7 @@ button#buttonMenu{
     position: fixed;
     top: 78px;
     left: 80vw;
+    cursor: pointer;
 }
 dialog#menu::backdrop{
     background: rgba(55, 55, 55, 0.8)
@@ -213,6 +214,7 @@ button#btnCloseModal{
     background: #859876;
     width: 80px;
     height: 80px;
+    cursor: pointer;
 }
 
 dialog#menu{
@@ -232,6 +234,7 @@ dialog#menu{
 }
     a{
         text-decoration: none;
+        cursor: pointer;
     }
 
     hr{

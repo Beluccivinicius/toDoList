@@ -93,15 +93,20 @@ label{
 input{
     all:unset;
     background-color: #D9D9D9;
-    width: 360px;
+    width: 460px;
     height: 39px;
     border-radius: 16px;
     margin-left: 235px;
     padding-left: 20px;
 }
 
-i.edit{
-    background-color: #D9D9D9;
+i{
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+i:hover{
+    color: #D9D9D9;
 }
 
 hr{
@@ -131,6 +136,10 @@ a{
     text-decoration-line: underline;
     margin-left: 402px;
     margin-top: 32px;
+}
+
+a#changePassword:hover{
+    color: #212C14;
 }
 
 a#btnClose{
