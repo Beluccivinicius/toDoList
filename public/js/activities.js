@@ -1,9 +1,22 @@
 const modal = document.getElementById('menu');
-const btnExcluison = document.getElementsByClassName('exclusion');
+const btnExcluison = document.querySelector('exclusion');
 const btnPost = document.getElementById('posted');
 const btnMenu = document.getElementById('buttonMenu');
 const btnCloseModal = document.getElementById('btnCloseModal');
 const linkOut = document.getElementById('linkOut');
+const linksMenu = document.getElementsByClassName('linksMenu');
+
+function buttonX(id) {
+    const img = document.getElementById(`button${id}`);
+    img.src = './images/botaoexcluir.svg';
+    console.log(img);
+}
+
+function buttonMenos(id) {
+    const img = document.getElementById(`button${id}`);
+    img.src = './images/botaomenos.svg';
+    console.log(img);
+}
 
 //Open Modal/Close Modal
 btnCloseModal.addEventListener('click', function (e) {

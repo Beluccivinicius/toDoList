@@ -4,11 +4,14 @@ const activitiesService = require('../service/activities');
 const ToDoModel = require('../model/Activities');
 const { protect } = require('../middleware/authMiddleware');
 
-//get '/atividades'
 router.get('/', protect, async (req, res, next) => {
     try {
+        const today = new Date();
+        const split = JSON.stringify(today).split('-');
+        const [year, month, day] = split;
         const id = req.cookies.id;
         const toDo = await activitiesService.getAll(id);
+        const days = [];
         res.render('atividades', {
             style: 'activities.css',
             toDo
@@ -32,12 +35,11 @@ router.post('/', protect, async (req, res, next) => {
 });
 
 //logOut '/login'
-router.post('/logout', async function logoutUser(req, res) {
+router.post('/logout', async (req, res) => {
     res.cookie('jasonWebToken', '', {
         httpOnly: true,
         expires: new Date(0)
     });
-    res.cookie('id', '');
     res.status(200).redirect('/login');
 });
 

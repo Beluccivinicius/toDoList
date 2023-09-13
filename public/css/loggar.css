@@ -184,5 +184,10 @@ button.exclusion{
 img#imagePerfil{
     display: grid;
     margin: auto;
-    padding-top: 70px;
+    margin-top: 70px;
+    border-radius: 800px;
+}
+
+div#photo{
+    padding-top: 40px;
 }

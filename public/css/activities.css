@@ -125,7 +125,6 @@ font-weight: 500;
 
 input.button:hover{
     background-color: #212C14;
-    
 }
 div#check{
     margin-top: auto;
@@ -133,18 +132,18 @@ div#check{
     align-items: left;
 }
 button.exclusion{
-    width: 50px;
+    width: 44px;
     display: flex;
-    height: 50px;
+    height: 44px;
     margin-top: auto;
     align-content: left;
     align-items: center;
     flex-wrap: nowrap;
     justify-content: center;
     clip-path: circle();
-    background: #7E7E7E;
     color: transparent;
 }
+
 
 svg{
     max-width: 50%;
@@ -245,7 +244,6 @@ dialog#menu{
     }
 
 ul#menuList li{
-    border-bottom: #212C14;
     color: #D9D9D9;
     font-family: Roboto;
     font-size: 20px;
@@ -255,6 +253,11 @@ ul#menuList li{
     padding-bottom: 21px;
     list-style:none;
 }
+
+ul#menuList li:hover{
+    color: #212C14;
+}
+
 div#headerMenu{
     display: flex;
     align-items: left;

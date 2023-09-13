@@ -1,21 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
+const multer = require('multer');
+const { storage } = require('../Utils/multerConfig');
+const upload = multer({ storage: storage });
+// const { upload } = multer({ dest: path.resolve('users') });
 
-//'/perfil''
-//access /perfil
 router.get('/', async (req, res) => {
-    try {
+    const imgList = [];
+    const id = req.cookies.id;
+    imgList.push({ src: `./users/${id}_profilePhoto.png` });
+    console.log(imgList[0].src);
+    if (imgList.length < 1) {
+        imgList.push({ src: '/images/fotoperfildefault.svg' });
         res.render('perfil', {
-            style: 'profile.css'
+            style: 'profile.css',
+            imgList: imgList
         });
-    } catch (error) {}
+    } else {
+        res.render('perfil', {
+            style: 'profile.css',
+            imgList: imgList
+        });
+    }
 });
 
 // '/perfil'
 //changePhoto
-router.post('/', (req, res) => {
-    const foto = req.body;
+router.post('/newPhoto', upload.single('photo'), async (req, res) => {
+    console.log(req.cookies.id);
+    res.json('ok');
 });
 
 //'/perfil'
@@ -23,4 +37,5 @@ router.post('/', (req, res) => {
 router.post('/trocar/Informacao', (req, res) => {
     const { email, senha } = req.body;
 });
+
 module.exports = router;

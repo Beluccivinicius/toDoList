@@ -75,12 +75,9 @@
         {{#each toDo}}
             <li class="boxToDo" id="boxToDo">
                 <div id="check">
-                        <button type="button" class="exclusion" value="{{this._id}}" id="exclusion-{{this._id}}" onclick="handleClick('{{this._id}}')">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none">
-                                <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
-                                <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
-                            </svg>
-                        </button>
+                        <div type="button" class="exclusion" value="{{this._id}}" id="exclusion" onclick="handleClick('{{this._id}}')">
+                            <img id="button{{this._id}}" src="./images/botaomenos.svg" alt="excluir atividade" onmouseover="buttonX('{{this._id}}')" onmouseout="buttonMenos('{{this._id}}')">
+                        </div>
                 </div>
                     <div id="do-hour">
                         <span>{{this.oQueFazer}}</span>

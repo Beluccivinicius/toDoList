@@ -1,6 +1,6 @@
 <body>
     <div id="background">
-    <a type="button" href="/atividades" id="btnClose">
+    <a href="/atividades" id="btnClose">
         <svg xmlns="http://www.w3.org/2000/svg" width="47" height="46" viewBox="0 0 47 46" fill="none">
             <circle opacity="0.9" cx="4.5" cy="41.5" r="4.5" fill="#212C14"/>
             <circle cx="4.5" cy="4.5" r="4.5" fill="#212C14"/>
@@ -13,9 +13,14 @@
             <circle cx="14.5" cy="32.5" r="4.5" fill="#212C14"/>
         </svg>
     </a>
-    <div id="photoPerfil"><img src="/images/..." width="80px" height="80px"></div>
+    <div class="hover">
+    <button id="btnPhotoProfile">
+        <span id="changePhoto"></span>
+        <img id="imgProfile" src="{{imgList.0.src}}" width="198px" height="198px">
+    </button>
+    </div>
     <h3>Perfil</h3>
-    <form action="/perfil" method="put">
+    <form avction="/perfil" method="put">
     <label>Nome</label>
     <input type="text">
     <hr>
@@ -24,10 +29,24 @@
     <hr>
     <label>Código verificação</label>
     <input type="text">
-    <hr>
+    <i class="edit">oi</i>
     </form>
-    <div>
         <a href="/trocar/senha" id="changePassword">Trocar minha senha</a>
     </div>
-    </div>
+    <dialog id="uploadPhoto">
+        <div type="button" class="close" id="exclusion">
+            <img id="close" src="./images/botaomenos.svg" alt="fechar modal" onmouseover="buttonX()" onmouseout="buttonMenos()">
+        </div>
+        <div id="formsPhoto">
+            <button id="btnPhotoProfile">
+                <img id="imgChangePhoto" src="{{imgList.0.src}}" width="198px" height="198px">
+            </button>
+            <form action="/perfil/newPhoto" method="post" enctype="multipart/form-data">
+                <input type="file" id="choosePhoto">
+                <input class="button" type="submit" id="trocar" value="Trocar" type="submit">
+            </form>
+        </div>
+    </dialog>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src='/js/profile.js'></script>
