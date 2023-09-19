@@ -5,27 +5,24 @@ body{
 input.button{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    justify-content: center;
+    align-items: center;
     display: flex;
     margin-left: auto;
     margin-right: auto;
     margin-top: 41px;
-    padding-left: 90px;
     height: 54px;
     width: 264px;
     border-radius: 41px;
-    background: #859876;
+    background: #212C14;
     color: #D9D9D9;
     font-size: 32px;
     font-weight: 500;
-    }
-    
-    input#choosePhoto{
-        all: unset;
+    cursor: pointer;
     }
 
-    input.button:hover{
-        background-color: #212C14;
-        cursor: pointer;
+    input#choosePhoto{
+        display: none;
     }
 
 button{
@@ -78,7 +75,7 @@ span#changePhoto{
     font-family: Roboto;
 }
 
-label{
+label#infosProfile{
     color: #FFF;
     font-family: Roboto;
     font-size: 20px;
@@ -89,6 +86,25 @@ label{
     margin-top: 24px;
     margin-bottom: 14px;
 }
+
+
+
+label#escolherArquivo{
+    color: #859876;
+    font-family: Roboto;
+    cursor: pointer;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+label#escolherArquivo:hover{
+    color: #212C14;
+}
+
 
 input{
     all:unset;

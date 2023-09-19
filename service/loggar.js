@@ -1,5 +1,4 @@
 const Login = require('../model/Loggar');
-const ToDoModel = require('../model/Activities');
 const bcrypt = require('bcrypt');
 const asyncHandler = require('express-async-handler');
 
@@ -7,15 +6,18 @@ const loginServices = {
     login: asyncHandler(async (login) => {
         const { email, senha } = login;
         const loginCerto = await Login.findOne({ email });
+
         if (loginCerto && (await bcrypt.compare(senha, loginCerto.senha))) {
             return loginCerto._id;
         }
+
         return;
     }),
     createAccount: asyncHandler(async (newLogin) => {
         let emailCreate;
         const { email, senha } = newLogin;
         const compare = await Login.find({ email });
+
         if (compare.length > 0) {
             return (emailCreate = true);
         } else {

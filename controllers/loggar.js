@@ -3,6 +3,14 @@ const router = express.Router();
 const loggarServices = require('../service/loggar');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../Utils/generateToken');
+const fs = require('fs');
+// const dir = './users/';
+
+// fs.readdir(dir, (err, arquivos) => {
+//     arquivos.forEach((arquivo) => {
+//         console.log(arquivo);
+//     });
+// });
 
 //load '/login'
 router.get(
@@ -11,6 +19,8 @@ router.get(
         const imgList = [];
         const id = req.cookies.id;
         imgList.push({ src: `/users/${id}_profilePhoto.png` });
+
+        console.log(imgList);
         if (imgList.length < 1) {
             imgList.push({ src: '/images/fotoperfildefault.svg' });
         }
@@ -50,13 +60,17 @@ router.post(
 router.post(
     '/newUser',
     asyncHandler(async (req, res, next) => {
-        const newLoggin = req.body;
-        const emailCreate = await loggarServices.createAccount(newLoggin);
+        const { email, senha } = req.body;
+        const regex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-        if (emailCreate) {
-            let token;
-            token = generateToken(res, emailCreate);
+        const emailRegex = regex.test(`${email}`);
+
+        if (emailRegex == true) {
+            const emailCreate = await loggarServices.createAccount(req.body);
+
+            let token = generateToken(res, emailCreate);
         }
+
         res.json(emailCreate);
     })
 );

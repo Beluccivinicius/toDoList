@@ -9,6 +9,7 @@ input {
 button{
     all:unset;
 }
+
 /* Criar Contas */
 button#createLogin{
     all: unset;
@@ -112,6 +113,10 @@ input.text{
 input.button{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 28px;
     padding-left: 90px;
     height: 54px;
@@ -179,6 +184,7 @@ button.exclusion{
     clip-path: circle();
     background: #7E7E7E;
     color: transparent;
+    cursor: pointer;
 }
 
 img#imagePerfil{
@@ -190,4 +196,8 @@ img#imagePerfil{
 
 div#photo{
     padding-top: 40px;
+}
+
+div#createUser{
+    display: grid;
 }

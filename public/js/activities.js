@@ -75,8 +75,6 @@ async function posted(oQueFazer, dataCerta, horaCerta) {
             dataCerta,
             horaCerta
         })
-        .then((res) => {
-            return;
-        })
+        .then((res) => console.log(res))
         .catch((err) => console.log(err));
 }

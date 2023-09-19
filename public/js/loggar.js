@@ -3,24 +3,15 @@ const btnCreate = document.getElementById('createLogin');
 const modal = document.getElementById('inputArea');
 const btnClose = document.getElementById('close');
 const btnNewUser = document.getElementById('createUser');
+const img = document.getElementById('imgClose');
 
-// const consegui = (e) => {
-//     e.preventDefault();
-//     const email = document.getElementById('email');
-//     const senha = document.getElementById('password');
-//     doLogin(email.value, senha.value);
-//     console.log(`${email} oiiiiiiii`);
-// };
-
-// const doLogin = (email, senha) => {
-//     axios
-//         .post('http://localhost:8000/login', {
-//             email,
-//             senha
-//         })
-//         .then((res) => console.log('oi'))
-//         .catch((res) => console.log('oi'));
-// };
+//animação botão excluir
+function buttonX() {
+    img.src = './images/botaoexcluir.svg';
+}
+function buttonMenos() {
+    img.src = './images/botaomenos.svg';
+}
 
 btnCreate.addEventListener('click', createLoggin);
 function createLoggin() {
