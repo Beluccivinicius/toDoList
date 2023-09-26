@@ -178,6 +178,7 @@ dialog#uploadPhoto{
     position: absolute;
     margin-top: 70px;
     padding-top: 32px;
+    padding-bottom: 50px;
 }
 div#formsPhoto{
     display: grid;

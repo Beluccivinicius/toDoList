@@ -16,6 +16,7 @@ router.get(
         const id = req.cookies.id;
         const toDo = await activitiesService.getAll(id);
         const days = [];
+
         res.render('atividades', {
             style: 'activities.css',
             toDo

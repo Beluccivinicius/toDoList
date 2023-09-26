@@ -72,17 +72,19 @@ router.post(
     protect,
     upload.single('photo'),
     asyncHandler(async (req, res) => {
-        await sharp(req.file.buffer).resize(300, 300).toFile(path);
         res.json('ok');
     })
 );
 
 //'/perfil'
 //updateInformation
-router.patch('/informacao', (req, res) => {
-    const id = req.cookies.id;
-    console.log(req.body);
-    const update = Perfil.editProfile(req.body, id);
-});
+router.patch(
+    '/informacao',
+    asyncHandler(async (req, res) => {
+        const id = req.cookies.id;
+        console.log(req.body);
+        const update = await Perfil.editProfile(req.body, id);
+    })
+);
 
 module.exports = router;

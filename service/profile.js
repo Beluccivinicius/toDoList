@@ -7,8 +7,9 @@ const perfil = {
         return perfil;
     }),
     editProfile: asyncHandler(async (req, id) => {
-        const { email, nome, codigo } = req;
-        const update = await Login.findByIdAndUpdate({ _id: id }, { email, nome, codigo });
+        const { nome, email, codigo } = req;
+
+        const update = await Login.findByIdAndUpdate({ _id: id }, { nome, email, codigo });
         return;
     })
 };

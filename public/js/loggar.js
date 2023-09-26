@@ -23,11 +23,12 @@ btnClose.addEventListener('click', function (e) {
     modal.close();
 });
 
-btnNewUser.addEventListener('click', function (e) {
+btnNewUser.addEventListener('click', async function (e) {
     e.preventDefault();
     const { email, senha } = document.getElementById('create');
     console.log(email);
-    posted(email.value, senha.value);
+    const infos = await posted(email.value, senha.value);
+    location.reload();
 });
 
 const posted = (email, senha) => {

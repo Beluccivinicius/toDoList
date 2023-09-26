@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler');
 const loginServices = {
     login: asyncHandler(async (login) => {
         const { email, senha } = login;
+
         const loginCerto = await Login.findOne({ email });
 
         if (loginCerto && (await bcrypt.compare(senha, loginCerto.senha))) {
@@ -13,20 +14,24 @@ const loginServices = {
 
         return;
     }),
-    createAccount: asyncHandler(async (newLogin) => {
-        let emailCreate;
+    createAccount: asyncHandler(async function* (newLogin) {
         const { email, senha } = newLogin;
+        const jaExisteEmail = true;
+        const create = true;
+
         const compare = await Login.find({ email });
 
-        if (compare.length > 0) {
-            return (emailCreate = true);
-        } else {
-            const salt = await bcrypt.genSalt(10);
-            const hashSenha = await bcrypt.hash(senha, salt);
-            const newMember = await Login.create({ email, senha: hashSenha });
-            const id = newMember._id;
-            return id;
+        if (compare.length >= 1) {
+            return jaExisteEmail;
         }
+        console.log(compare);
+        const emailExiste = yield compare;
+
+        const [codigo, token, hashSenha] = emailExiste;
+
+        const newMember = await Login.create({ email, senha: hashSenha, codigo, token });
+
+        return create;
     })
 };
 

@@ -23,6 +23,7 @@ conn();
 app.use('/atividades', require('./controllers/activities.js'));
 app.use('/login', require('./controllers/loggar.js'));
 app.use('/perfil', require('./controllers/profile.js'));
+app.use('/token', require('./controllers/token.js'));
 
 //tratamento de erro das APIs
 app.use(notFound);

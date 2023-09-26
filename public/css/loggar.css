@@ -25,6 +25,7 @@ button#createLogin{
 
 button#createLogin:hover{
     text-decoration: underline;
+    cursor: pointer;
 }
 /* titulo */
 h1 {
@@ -172,11 +173,12 @@ h2{
     font-size: 60px;
     margin-bottom: 28px;
 }
+
 button.exclusion{
-    width: 50px;
+    width: 44px;
     display: flex;
     float: right;
-    height: 50px;
+    height: 44px;
     margin-top: auto;
     align-content: left;
     align-items: center;
@@ -186,6 +188,7 @@ button.exclusion{
     color: transparent;
     cursor: pointer;
 }
+
 
 img#imagePerfil{
     display: grid;

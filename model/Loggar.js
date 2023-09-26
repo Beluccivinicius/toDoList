@@ -15,6 +15,11 @@ const loginSchema = new Schema(
             required: false,
             unique: true
         },
+        verificado: {
+            type: Boolean,
+            required: false,
+            unique: false
+        },
         email: {
             type: String,
             required: true,
@@ -26,7 +31,8 @@ const loginSchema = new Schema(
         },
         token: {
             type: String,
-            required: false
+            required: true,
+            unique: true
         }
     },
     { timestamps: true }

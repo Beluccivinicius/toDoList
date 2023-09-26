@@ -6,7 +6,7 @@
   </p>
   </section>
   <div id="photo">
-    <img id="imagePerfil" src="{{imgList.0.src}}" height="198px" width="198px">
+    <img id="imagePerfil" src="{{img}}" height="198px" width="198px">
   </div>
   <section id="form">
     <form action="/login" method="post" id="post">
@@ -22,7 +22,7 @@
         <p id="wrongMessage">Senha ou Email incorretos</p>
       {{/if}}
       <div>
-        <input type="submit" name="loggar" class="button" value="login" id="loggar">
+        <input type="submit" name="loggar" class="button" value="Login" id="loggar">
       </div>
     </form>
       <div id="criarConta">
@@ -31,22 +31,26 @@
   </section>
   <dialog id="inputArea">
       <div>
-      <button type="button" class="exclusion" id="close">
+      <button class="exclusion" id="close">
         <img src="./images/botaomenos.svg" alt="excluir atividade" onmouseover="buttonX()" onmouseout="buttonMenos()" id="imgClose">
-      </button>
+      </but>
       </div>
       <h2>Criar login</h2>
       <form action="/login/" method="post" id="create">
+    <div>
+        <label for="nome" class="label">Nome</label>
+        <input class="text" type="text" name="nome" placeholder="Jhon Doe">
+    </div>
     <div>
       <label for="email" class="label">Email</label>
       <input class="text" type="email" name="email" placeholder="nome@exemplo.com">
     </div>
     <div>
-      <label for="inputPassword" class="label">Senha</label>
+      <label for="senha" class="label">Senha</label>
       <input class="text" type="password" name="senha" placeholder="senha">
     </div>
     <div>
-      <input type="submit" class="button" id="createUser">
+      <input type="submit" class="button" value="Criar" id="createUser">
     </div>
     </form>
   </dialog>
