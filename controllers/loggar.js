@@ -77,7 +77,7 @@ router.post(
         const generator = await loggarServices.createAccount(req.body);
 
         const { value: emailExiste } = await generator.next();
-        console.log('meupasx');
+
         if (emailExiste == true) {
             console.log(`${email} já existe`);
             return;
