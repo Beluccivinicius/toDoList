@@ -4,6 +4,8 @@ const loggarServices = require('../service/loggar');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../Utils/generateToken');
 const fs = require('fs');
+const path = require('path');
+const users = path.resolve('public', 'users');
 const sendEmail = require('../Utils/nodeMailer');
 const bcrypt = require('bcrypt');
 
@@ -11,26 +13,22 @@ router.get(
     '/',
     asyncHandler(async (req, res) => {
         const id = req.cookies.id;
-        let img = `/users/${id}_profilePhoto.png`;
 
-        if (img == '/users/_profilePhoto.png') {
-            img = './users/fotoperfildefault.svg';
+        let img = `${id}_profilePhoto.png`;
+
+        const files = fs.readdirSync(users);
+        const arquivoExiste = files.includes(img);
+
+        if (arquivoExiste === false) {
+            img = 'fotoperfildefault.svg';
         }
 
-        let noLogin;
+        res.cookie('img', img);
 
-        if (req.cookies.noLogin) {
-            res.render('login', {
-                style: 'loggar.css',
-                img,
-                noLogin
-            });
-        } else {
-            res.render('login', {
-                style: 'loggar.css',
-                img
-            });
-        }
+        res.render('login', {
+            style: 'loggar.css',
+            img
+        });
     })
 );
 
@@ -39,6 +37,7 @@ router.post(
     '/',
     asyncHandler(async (req, res, next) => {
         const compare = await loggarServices.login(req.body);
+        const noLogin = true;
 
         if (compare) {
             const newToken = await generateToken(res, compare._id);
@@ -52,11 +51,14 @@ router.post(
             });
 
             res.redirect('/atividades');
+            return;
+        } else {
+            res.render('login', {
+                style: 'loggar.css',
+                noLogin,
+                img: req.cookies.img
+            });
         }
-
-        const noLogin = true;
-        res.cookie('noLogin', noLogin);
-        res.redirect('/login');
     })
 );
 
@@ -66,47 +68,40 @@ router.post(
     asyncHandler(async (req, res, next) => {
         const { nome, email, senha } = req.body;
         const regex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
+        const loginJaExsite = true;
         const emailRegex = regex.test(`${email}`);
 
         if (emailRegex == false) {
             console.log(`${email} não é um email válido`);
             return;
         }
-        console.log('oiiii');
         const generator = await loggarServices.createAccount(req.body);
 
         const { value: emailExiste } = await generator.next();
-        console.log('meupasx');
+
         if (emailExiste == true) {
             console.log(`${email} já existe`);
+            res.render('login', {
+                style: 'loggar.css',
+                loginJaExsite
+            });
             return;
         }
 
-        const email1 = `vinicius.belucci@outlook.com`;
-        const random = Math.random().toString(16).substr(2);
-        const randomC = Math.random() * 100000;
-        console.log(randomC);
+        const token = generateToken(res, emailExiste._id);
 
-        // token gmail não está sendo feito com sucesso
-        // const emailVerificacao = await sendEmail(nome, email1, random);
+        const infos = [token];
 
-        const token = generateToken(res, random);
+        const { value: tokenCodigo } = await generator.next(infos);
 
-        const salt = await bcrypt.genSalt(10);
-        const hashSenha = await bcrypt.hash(senha, salt);
-
-        const infos = [random, token, hashSenha];
-        console.log('oi');
-        const tokenCodigo = await generator.next(infos);
-
-        if (tokenCodigo.value == true) {
-            // res.send(random);
-            res.render('/token');
-        } else {
+        if (tokenCodigo != true) {
             console.log('algo deu errado');
             res.status(400);
         }
+
+        res.cookie('id', emailExiste._id);
+        res.status(201);
+        res.redirect('/perfil/codigo-seguranca');
     })
 );
 

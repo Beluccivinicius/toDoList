@@ -1,4 +1,4 @@
-const Login = require('../model/Loggar');
+const Login = require('../model/Loggar.js');
 const bcrypt = require('bcrypt');
 const asyncHandler = require('express-async-handler');
 
@@ -15,23 +15,35 @@ const loginServices = {
         return;
     }),
     createAccount: asyncHandler(async function* (newLogin) {
-        const { email, senha } = newLogin;
+        const { nome, email, senha } = newLogin;
         const jaExisteEmail = true;
-        const create = true;
+        const created = true;
 
         const compare = await Login.find({ email });
 
         if (compare.length >= 1) {
             return jaExisteEmail;
         }
-        console.log(compare);
-        const emailExiste = yield compare;
 
-        const [codigo, token, hashSenha] = emailExiste;
+        const salt = await bcrypt.genSalt(10);
+        const hashSenha = await bcrypt.hash(senha, salt);
 
-        const newMember = await Login.create({ email, senha: hashSenha, codigo, token });
+        const newMember = await Login.create({ nome: nome, email: email, senha: hashSenha, verificado: false });
 
-        return create;
+        const emailExiste = yield newMember._id;
+
+        const [token] = emailExiste;
+
+        const newToken = Login.findByIdAndUpdate(newMember._id, { token: token });
+
+        return created;
+    }),
+    verificado: asyncHandler(async (id) => {
+        if (verificado == true) {
+            const infos = Login.findByIdAndUpdate(id, { verificado: true });
+        }
+
+        return;
     })
 };
 

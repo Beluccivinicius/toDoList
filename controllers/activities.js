@@ -10,12 +10,8 @@ router.get(
     '/',
     protect,
     asyncHandler(async (req, res, next) => {
-        const today = new Date();
-        const split = JSON.stringify(today).split('-');
-        const [year, month, day] = split;
         const id = req.cookies.id;
         const toDo = await activitiesService.getAll(id);
-        const days = [];
 
         res.render('atividades', {
             style: 'activities.css',
@@ -62,23 +58,6 @@ router.delete('/:id', protect, async (req, res, next) => {
     } catch (error) {
         res.status(500).end('Deu erro');
         console.log(error);
-    }
-});
-
-//Edit toDo
-router.patch('/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        await activitiesService.edit(id);
-        const toDo = await activitiesService.getAll();
-
-        res.render('atividades', {
-            style: 'atividades.css',
-            script: 'atividades.js',
-            toDo
-        });
-    } catch (error) {
-        res.status(500).end('Deu erro');
     }
 });
 

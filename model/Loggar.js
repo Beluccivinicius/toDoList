@@ -7,18 +7,12 @@ const loginSchema = new Schema(
     {
         nome: {
             type: String,
-            required: false,
+            required: true,
             unique: false
-        },
-        codigo: {
-            type: String,
-            required: false,
-            unique: true
         },
         verificado: {
             type: Boolean,
-            required: false,
-            unique: false
+            required: true
         },
         email: {
             type: String,
@@ -27,12 +21,13 @@ const loginSchema = new Schema(
         },
         senha: {
             type: String,
-            required: true
+            required: true,
+            unique: false
         },
         token: {
             type: String,
-            required: true,
-            unique: true
+            required: false,
+            unique: false
         }
     },
     { timestamps: true }

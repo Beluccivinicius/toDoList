@@ -30,7 +30,7 @@ div#content{
 h1 {
     all: unset;
     font-family: 'Roboto', sans-serif;
-    color: #fff;
+    color: #212C14;
     font-size: 64px;
     margin-top: 43px;
     margin-left: 12px;
@@ -48,7 +48,7 @@ input#button{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
-    margin-top: 28px;
+    margin-top: 8px;
     text-align: center;
     height: 54px;
     width: 264px;
@@ -65,9 +65,14 @@ input#codigo{
     padding-left: 32px;
     padding-top: 13px;
     border-radius: 16px;
-    margin-top: 67px;
+    margin-top: 50px;
     margin-bottom: 28px;
     background: #D9D9D9;
+}
+
+form{
+    display: grid;
+    justify-items: center;
 }
 
 input::placeholder{
@@ -80,4 +85,17 @@ input::placeholder{
 
 div#close{
     margin-left: 1022px;
+}
+
+div#time{
+    font-family: 'Roboto', sans-serif;
+    color: #D9D9D9;
+    font-size: 24px;
+    margin-top: 32px;
+}
+
+div#time:hover{
+    color: #373737;
+    text-decoration: underline;
+    cursor: pointer;
 }

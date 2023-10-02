@@ -13,20 +13,15 @@ const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectURI)
 oAuth2Client.setCredentials({ refresh_token: refreshToken });
 
 const sendEmail = async (nome, email, random) => {
-    const accessToken = await oAuth2Client.getAccessToken();
-
+    // const accessToken = await oAuth2Client.getAccessToken();
+    console.log(random);
     const transport = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
         auth: {
-            type: '0Auth2',
             user,
-            pass,
-            clientId,
-            clientSecret,
-            refreshToken,
-            accessToken
+            pass
         },
         tls: {
             rejectUnauthorized: true

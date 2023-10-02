@@ -23,20 +23,12 @@ btnClose.addEventListener('click', function (e) {
     modal.close();
 });
 
-btnNewUser.addEventListener('click', async function (e) {
-    e.preventDefault();
-    const { email, senha } = document.getElementById('create');
-    console.log(email);
-    const infos = await posted(email.value, senha.value);
-    location.reload();
-});
+// JEITO PARA PEGAR VALORES DE UM FORMS PARA UM MÉTODO DELETE/PATH
 
-const posted = (email, senha) => {
-    axios
-        .post(`http://localhost:8000/login/newUser`, {
-            email,
-            senha
-        })
-        .then((res) => console.log(res))
-        .catch((res) => console.log(res));
-};
+// btnNewUser.addEventListener('click', async function (e) {
+//     e.preventDefault();
+//     const { nome, email, senha } = document.getElementById('create');
+
+//     const infos = await posted(nome.value, email.value, senha.value);
+//     location.reload();
+// });
