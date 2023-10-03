@@ -1,0 +1,17 @@
+const Login = require('../model/Loggar');
+const asyncHandler = require('express-async-handler');
+
+const perfil = {
+    takePerfil: asyncHandler(async (id) => {
+        const perfil = await Login.findById(id).select('-senha');
+        return perfil;
+    }),
+    editProfile: asyncHandler(async (req, id) => {
+        const { nome, email, codigo } = req;
+
+        const update = await Login.findByIdAndUpdate({ _id: id }, { nome, email, codigo });
+        return;
+    })
+};
+
+module.exports = perfil;

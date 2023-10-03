@@ -1,0 +1,101 @@
+body{
+    background-color: #373737;
+}
+
+button{
+    all: unset;
+}
+
+div#background{
+    width: 1104px;
+    height: 535px;
+    background-color: #859876;
+    padding-top: 24px;
+    border-radius: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 138px;
+    position: relative;;
+}
+
+input{
+    all: unset
+}
+
+div#content{
+    display: grid;
+    justify-items: center;
+}
+
+h1 {
+    all: unset;
+    font-family: 'Roboto', sans-serif;
+    color: #212C14;
+    font-size: 64px;
+    margin-top: 43px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+span#text{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 24px;
+    margin-top: 36px;
+}
+
+input#button{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    margin-top: 8px;
+    text-align: center;
+    height: 54px;
+    width: 264px;
+    border-radius: 41px;
+    background: #212C14;
+    color: #D9D9D9;
+    font-size: 32px;
+    font-weight: 500;
+    }
+
+input#codigo{
+    width: 560px;
+    height: 54px;
+    padding-left: 32px;
+    padding-top: 13px;
+    border-radius: 16px;
+    margin-top: 50px;
+    margin-bottom: 28px;
+    background: #D9D9D9;
+}
+
+form{
+    display: grid;
+    justify-items: center;
+}
+
+input::placeholder{
+    color: #7B8476;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+div#close{
+    margin-left: 1022px;
+}
+
+div#time{
+    font-family: 'Roboto', sans-serif;
+    color: #D9D9D9;
+    font-size: 24px;
+    margin-top: 32px;
+}
+
+div#time:hover{
+    color: #373737;
+    text-decoration: underline;
+    cursor: pointer;
+}

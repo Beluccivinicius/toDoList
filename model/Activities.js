@@ -10,26 +10,39 @@ const toDoSchema = new Schema(
             required: true,
             ref: 'Login'
         },
-        oQueFazer: {
-            type: String,
-            required: false
+        data: {
+            ano: {
+                type: String,
+                required: false
+            },
+            mes: {
+                type: String,
+                required: false
+            },
+            dia: {
+                type: String,
+                required: false
+            }
         },
-        dia: {
-            type: String,
-            required: false
-        },
-        mes: {
-            type: String,
-            required: false
-        },
-        ano: {
-            type: String,
-            required: false
-        },
-        horaCerta: {
-            type: String,
-            required: false
-        }
+        oQueFazer: [
+            {
+                type: String,
+                required: false
+            }
+        ],
+        hora: [
+            {
+                hora: {
+                    type: String,
+                    required: false
+                },
+                minuto: {
+                    type: String,
+                    required: false
+                }
+            }
+        ]
+
     },
     { timeStamp: true }
 );
