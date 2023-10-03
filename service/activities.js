@@ -39,6 +39,7 @@ const activitiesService = {
         const update = { oQueFazer, dataCerta, horaCerta };
 
         try {
+            ``;
             const edit = await ToDoModel.updateOne({ id, update });
         } catch (error) {
             console.log(error);
