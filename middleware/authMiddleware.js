@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const Login = require('../model/Loggar');
 
 const protect = asyncHandler(async (req, res, next) => {
+
     let token;
 
     token = req.cookies.jasonWebToken;
@@ -15,6 +16,7 @@ const protect = asyncHandler(async (req, res, next) => {
         next();
     } else {
         res.status(401).redirect('/login');
+
     }
 });
 

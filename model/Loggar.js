@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 
 const loginSchema = new Schema(
     {
+
         nome: {
             type: String,
             required: true,
@@ -14,6 +15,7 @@ const loginSchema = new Schema(
             type: Boolean,
             required: true
         },
+
         email: {
             type: String,
             required: true,

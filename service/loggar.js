@@ -1,3 +1,4 @@
+
 const Login = require('../model/Loggar.js');
 const bcrypt = require('bcrypt');
 const asyncHandler = require('express-async-handler');
@@ -23,6 +24,7 @@ const loginServices = {
 
         if (compare.length >= 1) {
             return jaExisteEmail;
+
         }
 
         const salt = await bcrypt.genSalt(10);

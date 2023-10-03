@@ -8,6 +8,8 @@ const path = require('path');
 const users = path.resolve('public', 'users');
 const sendEmail = require('../Utils/nodeMailer');
 const bcrypt = require('bcrypt');
+const { protect } = require('../middleware/authMiddleware');
+const axios = require('axios');
 
 router.get(
     '/',
@@ -36,6 +38,7 @@ router.get(
 router.post(
     '/',
     asyncHandler(async (req, res, next) => {
+        const { email, senha } = req.body;
         const compare = await loggarServices.login(req.body);
         const noLogin = true;
 
@@ -66,6 +69,7 @@ router.post(
 router.post(
     '/newUser',
     asyncHandler(async (req, res, next) => {
+
         const { nome, email, senha } = req.body;
         const regex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
         const loginJaExsite = true;
@@ -102,6 +106,7 @@ router.post(
         res.cookie('id', emailExiste._id);
         res.status(201);
         res.redirect('/perfil/codigo-seguranca');
+
     })
 );
 

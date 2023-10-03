@@ -4,6 +4,7 @@
     outline: unset;
 }
 
+
 a{
     all: unset;
 }
@@ -15,6 +16,7 @@ input {
 button{
     all:unset
 }
+
 
 /* plano de fundo */
 body{
@@ -140,7 +142,6 @@ div#check{
     margin-top: auto;
     margin-bottom: auto;
     align-items: left;
-}
 
 button.exclusion{
     width: 44px;

@@ -5,6 +5,7 @@ const ToDoModel = require('../model/Activities');
 const { protect } = require('../middleware/authMiddleware');
 const asyncHandler = require('express-async-handler');
 
+
 //entrar na página de atividades
 router.get(
     '/',
