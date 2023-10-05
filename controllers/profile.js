@@ -31,6 +31,7 @@ router.get(
         const email = `vinicius.belucci@outlook.com`;
 
         cache.codigoVerificacao = numberRandom;
+        cache.id = id;
         cache.expirar();
 
         const message = await sendEmail(nome, email, numberRandom)

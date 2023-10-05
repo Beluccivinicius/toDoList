@@ -39,9 +39,7 @@ const loginServices = {
         return created;
     }),
     verificado: asyncHandler(async (id) => {
-        if (verificado == true) {
-            const infos = Login.findByIdAndUpdate(id, { verificado: true });
-        }
+        const infos = Login.findByIdAndUpdate(id, { verificado: true });
 
         return;
     })

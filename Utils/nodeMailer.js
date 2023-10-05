@@ -1,3 +1,4 @@
+const nodemailer = require('nodemailer');
 // oAuth2Client.setCredentials({ refresh_token: refreshToken });
 
 const sendEmail = async (nome, email, random) => {
@@ -8,8 +9,8 @@ const sendEmail = async (nome, email, random) => {
         port: 465,
         secure: true,
         auth: {
-            user,
-            pass
+            user: process.env.MY_EMAIL,
+            pass: process.env.EMAIL_PASSWORD
         },
         tls: {
             rejectUnauthorized: true

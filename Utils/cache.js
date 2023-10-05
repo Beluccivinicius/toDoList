@@ -1,5 +1,5 @@
 const cache = {
-    codigoVerificacao: 'expirado',
+    codigoVerificacao: 12345,
     expirar: function () {
         setTimeout(() => {
             this.codigoVerificacao = 'expirado';
