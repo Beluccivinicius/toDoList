@@ -1,0 +1,198 @@
+body{
+    background: #373737;
+}
+
+input.button{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 41px;
+    height: 54px;
+    width: 264px;
+    border-radius: 41px;
+    background: #212C14;
+    color: #D9D9D9;
+    font-size: 32px;
+    font-weight: 500;
+    cursor: pointer;
+    }
+
+    input#choosePhoto{
+        display: none;
+    }
+
+button{
+    all:unset
+}
+
+div#background{
+    width: 984px;
+    height: 100%;
+    background-color: #859876;
+    border-radius: 51px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 70px;
+    display: grid;
+}
+
+button#btnPhotoProfile{
+    border-radius: 100px;
+    width: 198px;
+    margin: auto;
+    margin-bottom: 26px;
+    height: 198px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    box-shadow:4px 4px 20px #00000060;
+}
+
+button#btnPhotoProfile.fade{
+    opacity: 0.45;
+}
+img#imgChangePhoto{
+    border-radius: 100px;
+    width: 200px;
+    height: 198px;
+}
+img#imgProfile{
+    border-radius: 100px;
+    width: 200px;
+    height: 198px;
+    cursor: pointer;
+}
+span#changePhoto{
+    display: grid;
+    margin-top: auto;
+    position: absolute;
+    color: #000;
+    font-family: Roboto;
+}
+
+label#infosProfile{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    display: block;
+    margin-left: 175px;
+    margin-top: 24px;
+    margin-bottom: 14px;
+}
+
+
+
+label#escolherArquivo{
+    color: #859876;
+    font-family: Roboto;
+    cursor: pointer;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+label#escolherArquivo:hover{
+    color: #212C14;
+}
+
+
+input{
+    all:unset;
+    background-color: #D9D9D9;
+    width: 460px;
+    height: 39px;
+    border-radius: 16px;
+    margin-left: 235px;
+    padding-left: 20px;
+}
+
+i{
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+i:hover{
+    color: #D9D9D9;
+}
+
+hr{
+    width: 671px;
+    margin-top: 41px;
+    border-color: #212C14;
+}
+
+h3{
+    all: unset;
+    color: #FFF;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: 600;
+    display: grid;
+    align-items: center;
+}
+
+a{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
+    margin-left: 402px;
+    margin-top: 32px;
+}
+
+a#changePassword:hover{
+    color: #212C14;
+}
+
+a#btnClose{
+    margin-top: 28px;
+    margin-left: 900px;
+    margin-bottom: 0;
+    align-content: center;
+    width: 47px;
+    height: 47px;
+}
+
+dialog#uploadPhoto::backdrop{
+    background: rgba(55, 55, 55, 0.8)
+}
+dialog#uploadPhoto{
+    width: 867px;
+    height: 500px;
+    background-color: #D9D9D9;
+    border-radius: 36px;
+    position: absolute;
+    margin-top: 70px;
+    padding-top: 32px;
+    padding-bottom: 50px;
+}
+div#formsPhoto{
+    display: grid;
+    justify-items: center;
+    grid-row-gap: 40px;
+}
+div.close{
+    margin-bottom: 80px;
+    cursor: pointer;
+}
+
+img#close{
+    margin-left: 10px;
+    margin-right: auto;
+    float: right;
+    
+}

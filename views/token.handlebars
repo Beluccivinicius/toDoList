@@ -1,0 +1,22 @@
+<body onload="decremento()">
+    <div id="background">
+    <div>
+        <div id="close">
+            <a href="/login">
+                <img src="./images/botaovoltar.svg">
+            </a>
+        </div>
+        <div id="content">
+            <h1>Código de autenticação</h1>
+            <span id="text">Um código de autenticação de 5 dígitos será enviado para seu e-mail.</span>
+            <div id="time"></div>
+            <form action="/token" method="post" id="token">
+                <input type="text" id="codigo" name="codigo" placeholder="79422">
+                <input type="button" id="button" value="Confirmar">
+            </form>
+        </div>
+        </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://kit.fontawesome.com/38bc343883.js" crossorigin="anonymous"></script>
+<script src="./js/token.js"></script>

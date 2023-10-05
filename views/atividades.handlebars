@@ -1,6 +1,55 @@
 <body>
 <head>
+    <div>
     <h1>toDo list</h1>
+    <button target="div-hiden"  type="button" id="buttonMenu"><svg xmlns="http://www.w3.org/2000/svg" width="136" height="136" viewBox="0 0 136 136" fill="none">
+  <g filter="url(#filter0_d_874_159)">
+    <circle cx="68" cy="62" r="62" fill="#859876"/>
+    <ellipse cx="39.1137" cy="61.2955" rx="9.15909" ry="9.15909" fill="#212C14"/>
+    <ellipse cx="68.7045" cy="61.2955" rx="9.15909" ry="9.15909" fill="#212C14"/>
+    <ellipse cx="98.2956" cy="61.2955" rx="9.15909" ry="9.15909" fill="#212C14"/>
+  </g>
+  <defs>
+    <filter id="filter0_d_874_159" x="0" y="0" width="136" height="136" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="6"/>
+      <feGaussianBlur stdDeviation="3"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_874_159"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_874_159" result="shape"/>
+    </filter>
+  </defs>
+</svg></button>
+    </div>
+    <section>
+        <dialog id="menu">
+            <div id="headerMenu">
+            <h3>Menu</h3>
+            <button type="button" class="exclusion" id="btnCloseModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="47" height="46" viewBox="0 0 47 46" fill="none">
+                    <circle opacity="0.9" cx="4.5" cy="41.5" r="4.5" fill="#212C14"/>
+                    <circle cx="4.5" cy="4.5" r="4.5" fill="#212C14"/>
+                    <circle cx="23.5" cy="23.5" r="4.5" fill="#212C14"/>
+                    <circle cx="42.5" cy="41.5" r="4.5" fill="#212C14"/>
+                    <circle cx="33.5" cy="32.5" r="4.5" fill="#212C14"/>
+                    <circle cx="42.5" cy="4.5" r="4.5" fill="#212C14"/>
+                    <circle cx="32.5" cy="13.5" r="4.5" fill="#212C14"/>
+                    <circle cx="14.5" cy="13.5" r="4.5" fill="#212C14"/>
+                    <circle cx="14.5" cy="32.5" r="4.5" fill="#212C14"/>
+                </svg>
+            </button>
+            </div>
+            <ul id="menuList">
+            <li><a href="/perfil" id="goToPerfil">Perfil</a></li>
+            <hr>
+            <li><a id="goTohistoric">histórico afazer</a></li>
+            <hr>
+            <li><a id="linkOut">Sair</a></li>
+            <hr>
+        </dialog>
+    </section>
 </head>
 <div class="container">
     <form  action="/atividades" method="POST" id="post" name="principal">
@@ -19,19 +68,16 @@
         </div>
     </form>
     <div>
-            <input type="submit" class="button" value="POST" id="posted">
+            <input type="submit" class="button" value="Criar" id="posted">
     </div>
 </div>
     <ul class="list-group">
         {{#each toDo}}
             <li class="boxToDo" id="boxToDo">
                 <div id="check">
-                        <button type="button" class="exclusion" value="{{this._id}}" id="exclusion-{{this._id}}" onclick="handleClick('{{this._id}}')">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 19" fill="none">
-                                <rect x="2.53418" width="25" height="4" rx="2" transform="rotate(37 2.53418 0)" fill="#D9D9D9"/>
-                                <rect y="15.2028" width="25" height="4" rx="2" transform="rotate(-37 0 15.2028)" fill="#D9D9D9"/>
-                            </svg>
-                        </button>
+                        <div type="button" class="exclusion" value="{{this._id}}" id="exclusion" onclick="handleClick('{{this._id}}')">
+                            <img id="button{{this._id}}" src="./images/botaomenos.svg" alt="excluir atividade" onmouseover="buttonX('{{this._id}}')" onmouseout="buttonMenos('{{this._id}}')">
+                        </div>
                 </div>
                     <div id="do-hour">
                         <span>{{this.oQueFazer}}</span>
@@ -47,49 +93,4 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script>
-    const btnExcluison = document.getElementsByClassName('exclusion');
-    const btnPost = document.getElementById('posted')
-
-const deleted = (id) => {
-    axios
-        .delete(`http://localhost:8000/atividades/${id}`, {
-            _id: id
-        })
-        .then((res) => location.reload())
-        .catch((error) => {
-            if (error.request) {
-                console.log('sem resposta servidor');
-            } else if (error.response) {
-                console.log('Erro de resposta do servidor');
-            } else {
-                console.log('Erro ao fazer a solicitação');
-            }
-        });
-};
-
-async function handleClick(id) {
-    deleted(id);
-}
-
-
-const posted = (oQueFazer, dataCerta, horaCerta) => {
-    axios
-        .post('http://localhost:8000/atividades',{
-            oQueFazer,
-            dataCerta,
-            horaCerta
-    })
-    .then(res => location.reload())
-    .catch(err => console.log(err))
-}
-
-btnPost.addEventListener('click', async function(e) {
-    e.preventDefault();
-    const {oQueFazer, dataCerta, horaCerta} = document.getElementById("post");
-    await posted(oQueFazer.value, dataCerta.value, horaCerta.value);
-});
-
-</script>
-
-
+<script src="/js/activities.js"></script>

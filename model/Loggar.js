@@ -5,6 +5,15 @@ const { Schema } = mongoose;
 
 const loginSchema = new Schema(
     {
+        nome: {
+            type: String,
+            required: true,
+            unique: false
+        },
+        verificado: {
+            type: Boolean,
+            required: true
+        },
         email: {
             type: String,
             required: true,
@@ -12,11 +21,13 @@ const loginSchema = new Schema(
         },
         senha: {
             type: String,
-            required: true
+            required: true,
+            unique: false
         },
         token: {
             type: String,
-            required: false
+            required: false,
+            unique: false
         }
     },
     { timestamps: true }
