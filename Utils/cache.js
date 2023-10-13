@@ -1,9 +1,13 @@
 const cache = {
-    codigoVerificacao: 12345,
-    expirar: function () {
+    expirar: function (token) {
         setTimeout(() => {
-            this.codigoVerificacao = 'expirado';
+            cache[token] = 'expirado';
         }, 60000);
+    },
+
+    random: function () {
+        let random = parseInt(Math.random() * 100000);
+        return random;
     }
 };
 

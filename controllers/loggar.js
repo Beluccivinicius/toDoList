@@ -103,8 +103,8 @@ router.post(
         }
 
         res.cookie('id', emailExiste._id);
+        res.redirect('/token/codigo-seguranca');
         res.status(201);
-        res.redirect('/perfil/codigo-seguranca');
     })
 );
 

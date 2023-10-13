@@ -37,3 +37,22 @@ const toDoSchema = new Schema(
 const ToDoModel = mongoose.model('ToDo', toDoSchema);
 
 module.exports = ToDoModel;
+
+// const toDoSchema = new Schema(
+//     {
+//         user: {
+//             type: mongoose.Schema.Types.ObjectId,
+//             required: true,
+//             ref: 'Login'
+//         },
+//         whatToDo: {
+//             toDo: { type: String, required: false },
+//             date: { type: Date, required: false }
+//         },
+//         horaCerta: {
+//             type: String,
+//             required: false
+//         }
+//     },
+//     { timeStamp: true }
+// );

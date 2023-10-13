@@ -4,7 +4,8 @@ const cache = require('../Utils/cache');
 const loginServices = require('../service/loggar');
 const generateToken = require('../Utils/generateToken');
 const asyncHandler = require('express-async-handler');
-const { sharp } = require('sharp');
+const Perfil = require('../service/profile.js');
+const sendEmail = require('../Utils/nodeMailer');
 
 router.get('/', async (req, res) => {
     res.render('token', {
@@ -12,18 +13,46 @@ router.get('/', async (req, res) => {
     });
 });
 
+router.get(
+    '/codigo-seguranca',
+    asyncHandler(async (req, res) => {
+        const numberRandom = await cache.random();
+
+        const id = req.cookies.id;
+
+        const getEmail = await Perfil.takePerfil(id);
+
+        const nome = getEmail.nome;
+        //const email = getEmail.email - Pegar o Email que a pessoa passou
+        const email = `vinicius.belucci@outlook.com`; //email no ambiente de desenvolvimento
+
+        cache[id] = numberRandom;
+        console.log(cache);
+        cache.expirar(numberRandom);
+
+        const message = await sendEmail(nome, email, numberRandom)
+            .then((res) => console.log(res))
+            .catch((res) => console.log(res));
+
+        res.status(200);
+        res.redirect('/token');
+    })
+);
+
 router.post(
     '/',
     asyncHandler(async (req, res) => {
         const { codigo } = req.body;
         const id = req.cookies.id;
 
-        if (cache.codigoVerificacao == 'expirado') {
+        if (cache[id] == 'expirado') {
             console.log('reenviar código');
+
+            res.redirect('/token');
             return;
         }
 
-        if (codigo == cache.codigoVerificacao) {
+        if (codigo == cache[id]) {
             const updateData = await loginServices.verificado(id);
 
             const newToken = await generateToken(res, id);
@@ -38,6 +67,7 @@ router.post(
             res.redirect('/atividades');
         } else {
             console.log('token errado');
+            res.redirect('/token');
             return;
         }
     })
