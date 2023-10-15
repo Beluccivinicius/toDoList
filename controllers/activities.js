@@ -25,14 +25,9 @@ router.post(
     '/',
     protect,
     asyncHandler(async (req, res, next) => {
-        try {
-            const activity = req.body;
-            const id = req.cookies.id;
-            await activitiesService.create(activity, id);
-        } catch (error) {
-            res.status(500).end('Deu erro');
-            console.log(error);
-        }
+        const activity = req.body;
+        const id = req.cookies.id;
+        await activitiesService.create(activity, id);
     })
 );
 

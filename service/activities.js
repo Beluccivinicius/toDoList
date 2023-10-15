@@ -8,9 +8,25 @@ const activitiesService = {
             return console.log('insira o que vamos fazer');
         }
         const { oQueFazer, dataCerta, horaCerta } = activity;
-        const [ano, mes, dia] = activity.dataCerta.split('-');
 
-        const toDo = await ToDoModel.create({ oQueFazer, ano, mes, dia, horaCerta, user: id });
+        const getToDoUser = await ToDoModel.find({ user: id });
+
+        console.log(getToDoUser.length);
+
+        if (getToDoUser.length < 1) {
+            console.log('estou aqui');
+            const toDo = await ToDoModel.create({ user: id, whatToDo: [{ Do: oQueFazer, hour: horaCerta, date: dataCerta }] })
+                .then((res) => console.log(res))
+                .catch((res) => console.log(res));
+            console.log(toDo);
+            return;
+        } else {
+            console.log('eu estou aqui 2');
+            const toDo = await ToDoModel.findOneAndUpdate({ user: id }, { $push: { whatToDo: { Do: oQueFazer, hour: horaCerta, date: dataCerta } } }, { upsert: true })
+                .then((res) => console.log(res))
+                .catch((res) => console.log(res));
+            console.log(toDo);
+        }
     },
 
     deleteOne: async (id) => {

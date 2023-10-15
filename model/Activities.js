@@ -3,36 +3,20 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const toDoSchema = new Schema(
-    {
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Login'
-        },
-        oQueFazer: {
-            type: String,
-            required: false
-        },
-        dia: {
-            type: String,
-            required: false
-        },
-        mes: {
-            type: String,
-            required: false
-        },
-        ano: {
-            type: String,
-            required: false
-        },
-        horaCerta: {
-            type: String,
-            required: false
-        }
+const toDoSchema = new Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Login'
     },
-    { timeStamp: true }
-);
+    whatToDo: [
+        {
+            Do: { type: String, required: true },
+            hour: { type: String, required: false },
+            date: { type: String, required: false }
+        }
+    ]
+});
 
 const ToDoModel = mongoose.model('ToDo', toDoSchema);
 
@@ -45,9 +29,21 @@ module.exports = ToDoModel;
 //             required: true,
 //             ref: 'Login'
 //         },
-//         whatToDo: {
-//             toDo: { type: String, required: false },
-//             date: { type: Date, required: false }
+//         oQueFazer: {
+//             type: String,
+//             required: false
+//         },
+//         dia: {
+//             type: String,
+//             required: false
+//         },
+//         mes: {
+//             type: String,
+//             required: false
+//         },
+//         ano: {
+//             type: String,
+//             required: false
 //         },
 //         horaCerta: {
 //             type: String,
