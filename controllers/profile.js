@@ -17,8 +17,10 @@ router.get(
     asyncHandler(async (req, res) => {
         const id = req.cookies.id;
         let img = `${id}_profilePhoto.png`;
+        let cpfFormatted = undefined;
 
         const files = fs.readdirSync(users);
+
         const arquivoExiste = files.includes(img);
 
         if (arquivoExiste == false) {
@@ -27,12 +29,16 @@ router.get(
 
         const infos = await Perfil.takePerfil(id);
 
-        let { email, nome, codigo } = infos;
+        let { email, nome, cpf } = infos;
 
-        if (nome == undefined || nome == '') {
-            nome = 'naoTem';
-        } else if (codigo == undefined || codigo == '') {
-            codigo = 'naoTem';
+        const stringCpf = cpf.toString();
+
+        if (cpf) {
+            const threeFirstElement = stringCpf.substring(0, 3);
+            const threeSecondElement = stringCpf.substring(3, 6);
+            const threeThirdElement = stringCpf.substring(6, 9);
+            const twoLastElement = stringCpf.substring(9, 11);
+            cpfFormatted = threeFirstElement + '.' + threeSecondElement + '.' + threeThirdElement + '-' + twoLastElement;
         }
 
         res.render('perfil', {
@@ -40,7 +46,7 @@ router.get(
             img,
             email: email,
             nome: nome,
-            codigo: codigo
+            cpf: cpfFormatted
         });
     })
 );
@@ -63,7 +69,9 @@ router.patch(
     asyncHandler(async (req, res) => {
         const id = req.cookies.id;
         console.log(req.body);
-        const update = await Perfil.editProfile(req.body, id);
+        const oi = await Perfil.editProfile(req.body, id)
+            .then((res) => console.log(res))
+            .catch((res) => console.log(res));
     })
 );
 

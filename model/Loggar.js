@@ -24,10 +24,10 @@ const loginSchema = new Schema(
             required: true,
             unique: false
         },
-        token: {
-            type: String,
+        cpf: {
+            type: Number,
             required: false,
-            unique: false
+            unique: true
         }
     },
     { timestamps: true }

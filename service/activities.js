@@ -34,13 +34,22 @@ const activitiesService = {
         }
     },
 
-    deleteOne: async (id) => {
-        const excluison = await ToDoModel.deleteOne({ _id: `${id}` });
-
+    deleteOne: async (idToDo, idUser) => {
+        const excluison = await ToDoModel.updateOne({ user: idUser }, { $pull: { whatToDo: { _id: idToDo } } })
+            .then((res) => console.log(res))
+            .catch((res) => console.log(res));
+        console.log(excluison);
+        console.log(idUser);
+        console.log(idToDo);
         return excluison;
     },
     getAll: async (id) => {
         const getAll = await ToDoModel.find({ user: id }).lean();
+
+        if (getAll.length < 1) {
+            return;
+        }
+
         let allToDo = getAll[0].whatToDo;
         return allToDo;
     },

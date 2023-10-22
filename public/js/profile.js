@@ -64,16 +64,14 @@ const changePhoto = (formData) => {
 function buttonX() {
     const img = document.getElementById(`close`);
     img.src = './images/botaoexcluir.svg';
-    console.log(img);
 }
 function buttonMenos() {
     const img = document.getElementById(`close`);
     img.src = './images/botaomenos.svg';
-    console.log(img);
 }
 // textField.disabled = true;
 // Bloquear forms
-function blockForms(nome, codigo) {
+function blockForms(nome, cpf) {
     textField2.disabled = true;
 
     if (textField1.name != 'naoTem') {
@@ -82,14 +80,13 @@ function blockForms(nome, codigo) {
     }
     if (textField3.name != 'naoTem') {
         textField3.disabled = true;
-        textField3.value = codigo;
+        textField3.value = cpf;
     }
 }
 
 function unlockForms(input) {
     input.disabled = false;
     input.select();
-    console.log(input);
 }
 
 //atualizar as informações do site
@@ -97,16 +94,17 @@ btnInputFields.addEventListener('click', async function posted(e) {
     e.preventDefault();
     const nome = textField1.value;
     const email = textField2.value;
-    const codigo = textField3.value;
-    const put = await patched(nome, email, codigo);
+    const cpf = textField3.value;
+    console.log(cpf);
+    const put = await patched(nome, email, cpf);
     location.reload();
 });
 
-function patched(nome, email, codigo) {
+function patched(nome, email, cpf) {
     const data = {
         nome,
         email,
-        codigo
+        cpf
     };
     axios
         .patch('http://localhost:8000/perfil/informacao', data)

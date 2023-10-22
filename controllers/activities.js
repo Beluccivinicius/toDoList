@@ -12,7 +12,7 @@ router.get(
     asyncHandler(async (req, res, next) => {
         const id = req.cookies.id;
         const toDo = await activitiesService.getAll(id);
-        console.log(toDo);
+
         res.render('atividades', {
             style: 'activities.css',
             toDo
@@ -45,11 +45,13 @@ router.post(
 
 //Delete toDo
 router.delete('/:id', protect, async (req, res, next) => {
-    const { id } = req.params;
+    const { idToDo } = req.params.id;
+    const { idUser } = req.cookies;
+    console.log(`${req.params} ${req.cookies} estou aqui`);
     try {
-        const toDo = await activitiesService.getAll();
-        const deleted = await activitiesService.deleteOne(id);
-        res.status(200).json(toDo);
+        const deleted = await activitiesService.deleteOne(idToDo, idUser);
+        console.log(deleted + 'oi');
+        res.status(200);
     } catch (error) {
         res.status(500).end('Deu erro');
         console.log(error);
