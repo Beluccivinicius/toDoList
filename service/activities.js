@@ -7,25 +7,30 @@ const activitiesService = {
         if (!activity.oQueFazer) {
             return console.log('insira o que vamos fazer');
         }
+
         const { oQueFazer, dataCerta, horaCerta } = activity;
+
+        let arrayDate = dataCerta.split('-');
+        let takeOutYear = arrayDate.shift();
+        let dateOrdered = arrayDate.push(takeOutYear);
+        const dateToString = arrayDate.join('-');
 
         const getToDoUser = await ToDoModel.find({ user: id });
 
         console.log(getToDoUser.length);
 
         if (getToDoUser.length < 1) {
-            console.log('estou aqui');
-            const toDo = await ToDoModel.create({ user: id, whatToDo: [{ Do: oQueFazer, hour: horaCerta, date: dataCerta }] })
+            const toDo = await ToDoModel.create({ user: id, whatToDo: [{ Do: oQueFazer, hour: horaCerta, date: dateToString }] })
                 .then((res) => console.log(res))
                 .catch((res) => console.log(res));
-            console.log(toDo);
+
             return;
         } else {
-            console.log('eu estou aqui 2');
-            const toDo = await ToDoModel.findOneAndUpdate({ user: id }, { $push: { whatToDo: { Do: oQueFazer, hour: horaCerta, date: dataCerta } } }, { upsert: true })
+            const toDo = await ToDoModel.findOneAndUpdate({ user: id }, { $push: { whatToDo: { Do: oQueFazer, hour: horaCerta, date: dateToString } } }, { upsert: true })
                 .then((res) => console.log(res))
                 .catch((res) => console.log(res));
-            console.log(toDo);
+
+            return;
         }
     },
 
@@ -35,9 +40,9 @@ const activitiesService = {
         return excluison;
     },
     getAll: async (id) => {
-        const getAll = await ToDoModel.find({ user: id });
-
-        return getAll.map((doc) => doc.toObject());
+        const getAll = await ToDoModel.find({ user: id }).lean();
+        let allToDo = getAll[0].whatToDo;
+        return allToDo;
     },
     edit: async (req, res) => {
         const { id, oQueFazer, dataCerta, horaCerta } = req.body;

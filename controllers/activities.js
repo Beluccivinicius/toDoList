@@ -12,7 +12,7 @@ router.get(
     asyncHandler(async (req, res, next) => {
         const id = req.cookies.id;
         const toDo = await activitiesService.getAll(id);
-
+        console.log(toDo);
         res.render('atividades', {
             style: 'activities.css',
             toDo
