@@ -64,4 +64,19 @@ const validateCPF = async (cpf) => {
     };
 };
 
-module.exports = validateCPF;
+const standardizedCpf = (raw) => {
+    if (!typeof raw) {
+        return undefined;
+    }
+
+    const stringCpf = raw.toString();
+    const arrayNumbers = stringCpf.split('');
+
+    arrayNumbers.splice(3, 0, '.'), arrayNumbers.splice(7, 0, '.'), arrayNumbers.splice(11, 0, '-');
+
+    const formatted = arrayNumbers.join('');
+
+    return formatted;
+};
+
+module.exports = { validateCPF, standardizedCpf };

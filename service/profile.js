@@ -1,24 +1,23 @@
 const Login = require('../model/Loggar');
 const asyncHandler = require('express-async-handler');
-const validateCPF = require('../Utils/verificationCpf');
 
-const perfil = {
+const profileService = {
     takePerfil: asyncHandler(async (id) => {
-        const perfil = await Login.findById(id).select('-senha');
-        return perfil;
+        const profile = await Login.findById(id).select('-senha');
+        return profile;
     }),
-    editProfile: asyncHandler(async (req, id) => {
-        const { nome, email, cpf } = req;
-
-        const { isValid, raw } = await validateCPF(cpf);
-
-        if (isValid === true) {
-            await Login.findByIdAndUpdate({ _id: id }, { nome, email, cpf: raw });
+    editProfile: asyncHandler(async (nome, email, cpf, id) => {
+        if (cpf != undefined) {
+            await Login.findByIdAndUpdate({ _id: id }, { nome, email, cpf })
+                .select('-senha')
+                .then((res) => console.log(res))
+                .catch((res) => console.log(res));
+            return;
         }
 
-        const update = await Login.findByIdAndUpdate({ _id: id }, { nome, email });
+        await Login.findByIdAndUpdate({ _id: id }, { nome, email }).select('-senha');
         return;
     })
 };
 
-module.exports = perfil;
+module.exports = profileService;

@@ -3,13 +3,14 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { protect } = require('../middleware/authMiddleware');
 const multer = require('multer');
-const sharp = require('sharp');
+const { validateCPF, standardizedCpf } = require('../Utils/verificationCpf');
 const { storage } = require('../middleware/multerMiddleware');
 const upload = multer({ storage: storage });
 const path = require('path');
 const users = path.resolve('public', 'users');
+const cache = require('../Utils/cache');
 const fs = require('fs');
-const Perfil = require('../service/profile.js');
+const profileService = require('../service/profile.js');
 
 router.get(
     '/',
@@ -17,36 +18,32 @@ router.get(
     asyncHandler(async (req, res) => {
         const id = req.cookies.id;
         let img = `${id}_profilePhoto.png`;
-        let cpfFormatted = undefined;
 
         const files = fs.readdirSync(users);
 
-        const arquivoExiste = files.includes(img);
+        const imageExists = files.includes(img);
 
-        if (arquivoExiste == false) {
+        if (imageExists == false) {
             img = 'fotoperfildefault.svg';
         }
 
-        const infos = await Perfil.takePerfil(id);
+        const infos = await profileService.takePerfil(id);
 
-        let { email, nome, cpf } = infos;
+        const { email, nome, cpf } = infos;
 
-        const stringCpf = cpf.toString();
+        // cache[`${id}_profile`] = [email, nome, cpf];
 
-        if (cpf) {
-            const threeFirstElement = stringCpf.substring(0, 3);
-            const threeSecondElement = stringCpf.substring(3, 6);
-            const threeThirdElement = stringCpf.substring(6, 9);
-            const twoLastElement = stringCpf.substring(9, 11);
-            cpfFormatted = threeFirstElement + '.' + threeSecondElement + '.' + threeThirdElement + '-' + twoLastElement;
-        }
+        console.log(cache);
 
+        const formatedCpf = await standardizedCpf(cpf);
+
+        console.log('resultado :' + standardizedCpf(cpf));
         res.render('perfil', {
             style: 'profile.css',
             img,
-            email: email,
-            nome: nome,
-            cpf: cpfFormatted
+            email,
+            nome,
+            cpf: formatedCpf
         });
     })
 );
@@ -68,10 +65,19 @@ router.patch(
     '/informacao',
     asyncHandler(async (req, res) => {
         const id = req.cookies.id;
-        console.log(req.body);
-        const oi = await Perfil.editProfile(req.body, id)
-            .then((res) => console.log(res))
-            .catch((res) => console.log(res));
+        const { nome, email, cpf } = req.body;
+
+        const response = await validateCPF(cpf);
+
+        const { input, type, isValid, formated, raw } = response;
+
+        if (isValid === true) {
+            const updater = await profileService.editProfile(nome, email, raw, id);
+            res.status(201);
+        } else {
+            console.log('oi');
+            res.end({ msg: 'hello' });
+        }
     })
 );
 

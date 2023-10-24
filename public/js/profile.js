@@ -11,7 +11,7 @@ const spanNoPhoto = document.getElementById('spanNoPhoto');
 const span = document.getElementById('escolherArquivo');
 const textField1 = document.getElementById('nome');
 const textField2 = document.getElementById('email');
-const textField3 = document.getElementById('codigo');
+const textField3 = document.getElementById('cpf');
 const btnInputFields = document.getElementById('posted');
 
 //Fade imagem perfil
@@ -73,15 +73,6 @@ function buttonMenos() {
 // Bloquear forms
 function blockForms(nome, cpf) {
     textField2.disabled = true;
-
-    if (textField1.name != 'naoTem') {
-        textField1.disabled = true;
-        textField1.value = nome;
-    }
-    if (textField3.name != 'naoTem') {
-        textField3.disabled = true;
-        textField3.value = cpf;
-    }
 }
 
 function unlockForms(input) {
@@ -92,15 +83,17 @@ function unlockForms(input) {
 //atualizar as informações do site
 btnInputFields.addEventListener('click', async function posted(e) {
     e.preventDefault();
+
     const nome = textField1.value;
     const email = textField2.value;
     const cpf = textField3.value;
-    console.log(cpf);
-    const put = await patched(nome, email, cpf);
+
+    await patched(nome, email, cpf);
+
     location.reload();
 });
 
-function patched(nome, email, cpf) {
+const patched = (nome, email, cpf) => {
     const data = {
         nome,
         email,
@@ -108,6 +101,7 @@ function patched(nome, email, cpf) {
     };
     axios
         .patch('http://localhost:8000/perfil/informacao', data)
-        .then((res) => console.log(res))
+        .then((res) => res.json())
+        .then((data) => console.log(data))
         .catch((res) => console.log(res));
-}
+};
