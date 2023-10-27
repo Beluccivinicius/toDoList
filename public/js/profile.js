@@ -89,8 +89,6 @@ btnInputFields.addEventListener('click', async function posted(e) {
     const cpf = textField3.value;
 
     await patched(nome, email, cpf);
-
-    location.reload();
 });
 
 const patched = (nome, email, cpf) => {
@@ -101,7 +99,9 @@ const patched = (nome, email, cpf) => {
     };
     axios
         .patch('http://localhost:8000/perfil/informacao', data)
-        .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            const span = document.getElementById('cpfInvalido');
+            span.innerHTML = data.data.msg;
+        })
         .catch((res) => console.log(res));
 };

@@ -158,6 +158,20 @@ a#changePassword:hover{
     color: #212C14;
 }
 
+/* paragrafo erro CPF*/
+
+p#cpfInvalido{
+    color: #CA3232;
+    font-size: 24px;
+    font-style: bold;
+    font-family: Roboto;
+    margin-top: 16px;
+    margin-bottom: 0px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
 a#btnClose{
     margin-top: 28px;
     margin-left: 900px;

@@ -8,9 +8,10 @@ const { storage } = require('../middleware/multerMiddleware');
 const upload = multer({ storage: storage });
 const path = require('path');
 const users = path.resolve('public', 'users');
-const cache = require('../Utils/cache');
+const cache = require('../Utils/cacheProfile');
 const fs = require('fs');
 const profileService = require('../service/profile.js');
+const cacheProfile = require('../Utils/cacheProfile');
 
 router.get(
     '/',
@@ -31,13 +32,13 @@ router.get(
 
         const { email, nome, cpf } = infos;
 
-        // cache[`${id}_profile`] = [email, nome, cpf];
-
-        console.log(cache);
-
         const formatedCpf = await standardizedCpf(cpf);
 
-        console.log('resultado :' + standardizedCpf(cpf));
+        //upload infos for my cache
+        cache[id] = [email, nome, formatedCpf];
+
+        const expirar = cache.expirar(id);
+
         res.render('perfil', {
             style: 'profile.css',
             img,
@@ -65,9 +66,20 @@ router.patch(
     '/informacao',
     asyncHandler(async (req, res) => {
         const id = req.cookies.id;
+
         const { nome, email, cpf } = req.body;
 
-        const response = await validateCPF(cpf);
+        const infosInCache = cacheProfile[id];
+        const [emailInCache, nameInCache, cpfInCache] = infosInCache;
+
+        //evito o acesso no meu banco de dados sem necessidade se a pessoa não alterou nada
+        if (nameInCache == nome && emailInCache == email && cpfInCache == cpf) {
+            res.status(200);
+            return;
+        }
+
+        //faço a validação do cpf e se realmente passou algum CPF
+        const response = validateCPF(cpf);
 
         const { input, type, isValid, formated, raw } = response;
 
@@ -75,8 +87,7 @@ router.patch(
             const updater = await profileService.editProfile(nome, email, raw, id);
             res.status(201);
         } else {
-            console.log('oi');
-            res.end({ msg: 'hello' });
+            res.send({ msg: 'CPF inválido' });
         }
     })
 );
