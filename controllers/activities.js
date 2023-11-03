@@ -28,6 +28,7 @@ router.post(
         const activity = req.body;
         const id = req.cookies.id;
         await activitiesService.create(activity, id);
+        res.redirect('/atividades');
     })
 );
 
@@ -45,12 +46,12 @@ router.post(
 
 //Delete toDo
 router.delete('/:id', protect, async (req, res, next) => {
-    const { idToDo } = req.params.id;
-    const { idUser } = req.cookies;
-    console.log(`${req.params} ${req.cookies} estou aqui`);
+    const idToDo = req.params.id;
+    const idUser = req.cookies.id;
+
     try {
         const deleted = await activitiesService.deleteOne(idToDo, idUser);
-        console.log(deleted + 'oi');
+        res.json({ msg: 'toDo excluido' });
         res.status(200);
     } catch (error) {
         res.status(500).end('Deu erro');

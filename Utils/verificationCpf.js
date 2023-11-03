@@ -1,4 +1,4 @@
-const validateCPF = async (cpf) => {
+const validateCPF = (cpf) => {
     //retira todos os caracteres especiais
     const takeOutDigits = cpf.replace(/\D/g, '');
 
@@ -65,10 +65,9 @@ const validateCPF = async (cpf) => {
 };
 
 const standardizedCpf = (raw) => {
-    if (!typeof raw) {
+    if (raw == undefined) {
         return undefined;
     }
-
     const stringCpf = raw.toString();
     const arrayNumbers = stringCpf.split('');
 

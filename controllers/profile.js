@@ -83,11 +83,12 @@ router.patch(
 
         const { input, type, isValid, formated, raw } = response;
 
-        if (isValid === true) {
+        if (isValid == true) {
             const updater = await profileService.editProfile(nome, email, raw, id);
             res.status(201);
         } else {
             res.send({ msg: 'CPF inválido' });
+            res.status(200);
         }
     })
 );

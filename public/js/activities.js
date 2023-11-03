@@ -12,6 +12,7 @@ function buttonX(id) {
     img.src = './images/botaoexcluir.svg';
     console.log(img);
 }
+
 function buttonMenos(id) {
     const img = document.getElementById(`button${id}`);
     img.src = './images/botaomenos.svg';
@@ -42,7 +43,10 @@ function deleted(id) {
         .delete(`http://localhost:8000/atividades/${id}`, {
             _id: id
         })
-        .then((res) => location.reload())
+        .then((res) => {
+            console.log(res);
+            location.reload();
+        })
         .catch((error) => {
             if (error.request) {
                 console.log('sem resposta servidor');
@@ -65,7 +69,6 @@ btnPost.addEventListener('click', async function (e) {
     e.preventDefault();
     const { oQueFazer, dataCerta, horaCerta } = document.getElementById('post');
     const resultado = await posted(oQueFazer.value, dataCerta.value, horaCerta.value);
-    location.reload();
 });
 
 async function posted(oQueFazer, dataCerta, horaCerta) {
@@ -75,6 +78,8 @@ async function posted(oQueFazer, dataCerta, horaCerta) {
             dataCerta,
             horaCerta
         })
-        .then((res) => console.log(res))
+        .then((res) => {
+            location.reload();
+        })
         .catch((err) => console.log(err));
 }

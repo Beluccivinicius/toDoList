@@ -8,10 +8,7 @@ const profileService = {
     }),
     editProfile: asyncHandler(async (nome, email, cpf, id) => {
         if (cpf != undefined) {
-            await Login.findByIdAndUpdate({ _id: id }, { nome, email, cpf })
-                .select('-senha')
-                .then((res) => console.log(res))
-                .catch((res) => console.log(res));
+            await Login.findByIdAndUpdate({ _id: id }, { nome, email, cpf }).select('-senha');
             return;
         }
 
