@@ -10,27 +10,37 @@ router.get(
     '/',
     protect,
     asyncHandler(async (req, res, next) => {
-        const id = req.cookies.id;
-        const toDo = await activitiesService.getAll(id);
-
         res.render('atividades', {
-            style: 'activities.css',
-            toDo
+            style: 'activities.css'
         });
     })
 );
 
-//inserir toDo
-router.post(
-    '/',
+router.get(
+    '/toDo',
     protect,
     asyncHandler(async (req, res, next) => {
-        const activity = req.body;
         const id = req.cookies.id;
-        await activitiesService.create(activity, id);
-        res.redirect('/atividades');
+        const toDo = await activitiesService.getAll(id);
+
+        res.status(200).json(toDo);
     })
 );
+
+//inserir toDo
+router.post('/', protect, async (req, res, next) => {
+    try {
+        const activity = req.body;
+        const id = req.cookies.id;
+
+        await activitiesService.create(activity, id);
+        const toDo = await activitiesService.getAll(id);
+
+        res.json(toDo);
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 //logOut '/login'
 router.post(
@@ -46,13 +56,14 @@ router.post(
 
 //Delete toDo
 router.delete('/:id', protect, async (req, res, next) => {
-    const idToDo = req.params.id;
-    const idUser = req.cookies.id;
-
     try {
-        const deleted = await activitiesService.deleteOne(idToDo, idUser);
-        res.json({ msg: 'toDo excluido' });
-        res.status(200);
+        const idToDo = req.params.id;
+        const idUser = req.cookies.id;
+
+        await activitiesService.deleteOne(idToDo, idUser);
+        const toDo = await activitiesService.getAll(idUser);
+
+        res.status(200).json(toDo);
     } catch (error) {
         res.status(500).end('Deu erro');
         console.log(error);

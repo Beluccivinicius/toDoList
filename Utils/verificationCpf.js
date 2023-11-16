@@ -37,6 +37,10 @@ const validateCPF = (cpf) => {
 
     function verifyingDigit(sum) {
         const rest = sum % 11;
+
+        if (rest == 10) {
+            return '0';
+        }
         return (11 - rest).toString();
     }
 
@@ -46,7 +50,7 @@ const validateCPF = (cpf) => {
     const formatted = arrayNumbers.join('');
 
     const compare = verificationNumbers[0] == verificationNumbers[2] && verificationNumbers[1] == verificationNumbers[3];
-
+    console.log(verificationNumbers);
     if (compare) {
         return {
             input: `${cpf}`,
